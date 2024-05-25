@@ -5,8 +5,8 @@ typedef CollapseHeaderBuilder = Widget Function(
     BuildContext context, List<RowConfiguration> rows);
 
 class CollapsibleGridController<TGroupKey extends Comparable<TGroupKey>> {
-  late final List<ColumnConfiguration> columnConfigurations;
-  final List<RowConfiguration> rowConfigurations;
+  final List<ColumnConfiguration> columnConfigurations = [];
+  final List<RowConfiguration> rowConfigurations = [];
   final CollapseHeaderBuilder collapseHeaderBuilder;
   final int groupingColumnIndex;
 
@@ -16,11 +16,13 @@ class CollapsibleGridController<TGroupKey extends Comparable<TGroupKey>> {
   }
 
   CollapsibleGridController(
-      {required List columnConfigurations,
-      required this.rowConfigurations,
-      this.collapseHeaderBuilder = _defaultCollapseHeaderBuilder,
-      this.groupingColumnIndex = -1}) {
-    this.columnConfigurations = _createColumnsFrom(columnConfigurations);
+      {this.collapseHeaderBuilder = _defaultCollapseHeaderBuilder,
+      this.groupingColumnIndex = -1});
+
+  void initialize(
+      List columnConfigurations, List<RowConfiguration> rowConfigurations) {
+    this.columnConfigurations.addAll(_createColumnsFrom(columnConfigurations));
+    this.rowConfigurations.addAll(rowConfigurations);
   }
 
   List<ColumnConfiguration> _createColumnsFrom(List columnConfigurations) =>

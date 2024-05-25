@@ -56,10 +56,9 @@ class _MaterialStyleTableState extends State<MaterialStyleTable>
                   width: constraints.maxWidth * 0.90,
                   height: constraints.maxHeight * 0.90,
                   child: CollapsibleDataGrid(
-                      controller: CollapsibleGridController<String>(
-                    columnConfigurations: model.columns,
-                    rowConfigurations: model.rows,
-                  )),
+                      columnConfigurations: model.columns,
+                      rowConfigurations: model.rows,
+                      controller: CollapsibleGridController<String>()),
                 ),
               ),
             );

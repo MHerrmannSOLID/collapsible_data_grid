@@ -21,21 +21,7 @@ class SimpleTable extends StatefulWidget {
 }
 
 class _SimpleTableState extends State<SimpleTable> {
-  final model = CollapsibleGridController<String>(
-    columnConfigurations: [
-      'Column 1',
-      'Column 2',
-      'Column 3',
-    ],
-    rowConfigurations: [
-      RowConfiguration<String>(
-          cells: ['Row 1, Column 1', 'Row 1, Column 2', 'Row 1, Column 3']),
-      RowConfiguration<String>(
-          cells: ['Row 2, Column 1', 'Row 2, Column 2', 'Row 2, Column 3']),
-      RowConfiguration<String>(
-          cells: ['Row 3, Column 1', 'Row 3, Column 2', 'Row 3, Column 3']),
-    ],
-  );
+  final model = CollapsibleGridController<String>();
 
   _SimpleTableState() {}
 
@@ -56,6 +42,28 @@ class _SimpleTableState extends State<SimpleTable> {
                   width: constraints.maxWidth * 0.90,
                   height: constraints.maxHeight * 0.90,
                   child: CollapsibleDataGrid(
+                    columnConfigurations: [
+                      'Column 1',
+                      'Column 2',
+                      'Column 3',
+                    ],
+                    rowConfigurations: [
+                      RowConfiguration<String>(cells: [
+                        'Row 1, Column 1',
+                        'Row 1, Column 2',
+                        'Row 1, Column 3'
+                      ]),
+                      RowConfiguration<String>(cells: [
+                        'Row 2, Column 1',
+                        'Row 2, Column 2',
+                        'Row 2, Column 3'
+                      ]),
+                      RowConfiguration<String>(cells: [
+                        'Row 3, Column 1',
+                        'Row 3, Column 2',
+                        'Row 3, Column 3'
+                      ]),
+                    ],
                     headerBackground: Colors.blueGrey,
                     bodyBackground: Colors.blueGrey.shade100,
                     controller: model,
