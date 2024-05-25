@@ -18,7 +18,7 @@ void main() {
     await tester.pumpWidget(CollapsibleDataGrid(
       columnConfigurations: [],
       rowConfigurations: [],
-      controller: CollapsibleGridController<num>(),
+      controller: CollapsibleGridController(),
     ).wrapDirectional());
 
     expect(find.byType(TableHeader), findsOneWidget);
@@ -47,7 +47,7 @@ void main() {
           ],
         ),
       ],
-      controller: CollapsibleGridController<num>(),
+      controller: CollapsibleGridController(),
     ).wrapDirectional());
 
     var listView = tester.firstWidget<ListView>(find.byType(ListView));
@@ -78,7 +78,7 @@ void main() {
           ],
         ),
       ],
-      controller: CollapsibleGridController<num>(),
+      controller: CollapsibleGridController(),
     ).wrapDirectional());
 
     expect(find.byType(StaticTableRow), findsNWidgets(3));
@@ -116,7 +116,7 @@ void main() {
             ],
           ),
         ],
-        controller: CollapsibleGridController<num>(),
+        controller: CollapsibleGridController(),
       ),
     ).wrapDirectional());
 

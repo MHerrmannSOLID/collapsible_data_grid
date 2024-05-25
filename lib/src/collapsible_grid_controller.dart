@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 typedef CollapseHeaderBuilder = Widget Function(
     BuildContext context, List<RowConfiguration> rows);
 
-class CollapsibleGridController<TGroupKey extends Comparable<TGroupKey>> {
+class CollapsibleGridController {
   final List<ColumnConfiguration> columnConfigurations = [];
   final List<RowConfiguration> rowConfigurations = [];
   final CollapseHeaderBuilder collapseHeaderBuilder;

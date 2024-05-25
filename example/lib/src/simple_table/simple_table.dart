@@ -21,12 +21,26 @@ class SimpleTable extends StatefulWidget {
 }
 
 class _SimpleTableState extends State<SimpleTable> {
-  final model = CollapsibleGridController<String>();
+  final model = CollapsibleGridController();
 
   _SimpleTableState() {}
 
   @override
   Widget build(BuildContext context) {
+    var columnConfigurations = [
+      'Column 1',
+      'Column 2',
+      'Column 3',
+    ];
+    var rowConfigurations = [
+      RowConfiguration<String>(
+          cells: ['Row 1, Column 1', 'Row 1, Column 2', 'Row 1, Column 3']),
+      RowConfiguration<String>(
+          cells: ['Row 2, Column 1', 'Row 2, Column 2', 'Row 2, Column 3']),
+      RowConfiguration<String>(
+          cells: ['Row 3, Column 1', 'Row 3, Column 2', 'Row 3, Column 3']),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -36,41 +50,19 @@ class _SimpleTableState extends State<SimpleTable> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
           child: LayoutBuilder(
-            builder: (context, constraints) {
-              return Center(
-                child: SizedBox(
-                  width: constraints.maxWidth * 0.90,
-                  height: constraints.maxHeight * 0.90,
-                  child: CollapsibleDataGrid(
-                    columnConfigurations: [
-                      'Column 1',
-                      'Column 2',
-                      'Column 3',
-                    ],
-                    rowConfigurations: [
-                      RowConfiguration<String>(cells: [
-                        'Row 1, Column 1',
-                        'Row 1, Column 2',
-                        'Row 1, Column 3'
-                      ]),
-                      RowConfiguration<String>(cells: [
-                        'Row 2, Column 1',
-                        'Row 2, Column 2',
-                        'Row 2, Column 3'
-                      ]),
-                      RowConfiguration<String>(cells: [
-                        'Row 3, Column 1',
-                        'Row 3, Column 2',
-                        'Row 3, Column 3'
-                      ]),
-                    ],
-                    headerBackground: Colors.blueGrey,
-                    bodyBackground: Colors.blueGrey.shade100,
-                    controller: model,
-                  ),
+            builder: (context, constraints) => Center(
+              child: SizedBox(
+                width: constraints.maxWidth * 0.90,
+                height: constraints.maxHeight * 0.90,
+                child: CollapsibleDataGrid(
+                  columnConfigurations: columnConfigurations,
+                  rowConfigurations: rowConfigurations,
+                  headerBackground: Colors.blueGrey,
+                  bodyBackground: Colors.blueGrey.shade100,
+                  controller: model,
                 ),
-              );
-            },
+              ),
+            ),
           ),
         ),
       ),
