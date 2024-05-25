@@ -21,7 +21,12 @@ class SimpleTable extends StatefulWidget {
 }
 
 class _SimpleTableState extends State<SimpleTable> {
-  final model = CollapsibleGridController();
+  final model = CollapsibleGridController(
+    cellStyleBuilder: (colIdx, rowIdx, toStyle) => toStyle
+      ..borderConfiguration = CellBorderConfiguration(
+          bottomBorder: BorderSide(style: BorderStyle.solid))
+      ..backgroundColor = Colors.red.shade100,
+  );
 
   _SimpleTableState() {}
 

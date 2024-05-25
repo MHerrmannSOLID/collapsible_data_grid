@@ -5,10 +5,14 @@ class DemoAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text('-=| Solid Flex-Table Demo |=-'),
+        Text('-=| Collapsible Data Grid Demo |=-'),
         Spacer(),
-        TextButton(onPressed: () => Navigator.pushNamed(context, '/solid_table'), child: Text('SOLID style table')),
-        TextButton(onPressed: () => Navigator.pushNamed(context, '/'), child: Text('Simple table')),
+        TextButton(
+            onPressed: () => Navigator.pushNamed(context, '/material_table'),
+            child: Text('Material style table')),
+        TextButton(
+            onPressed: () => Navigator.pushNamed(context, '/'),
+            child: Text('Simple table')),
         SizedBox(width: 20.0)
       ],
     );

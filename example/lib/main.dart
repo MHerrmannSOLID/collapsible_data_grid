@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const SimpleTable(title: 'Simple table test'),
-          '/solid_table': (context) =>
+          '/material_table': (context) =>
               const MaterialStyleTable(title: 'Simple table test'),
         });
   }
