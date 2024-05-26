@@ -146,7 +146,6 @@ void main() {
         'Reinitialize the table model with the same data'
         '--> Initialize should keep the inner state since data did not change',
         () {
-      var hasChanged = false;
       var model = CollapsibleGridController();
       var rowConfigurations = [
         RowConfiguration<num>(cells: [1, 2, 3]),
@@ -170,7 +169,6 @@ void main() {
     test(
         'Reinitialize the table model with different data'
         '--> Inner state will be resetted due to change of data', () {
-      var hasChanged = false;
       var model = CollapsibleGridController();
       var rowConfigurationsFirst = [
         RowConfiguration<num>(cells: [1, 2, 3]),

@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  binary_tree:
+    dependency: transitive
+    description:
+      name: binary_tree
+      sha256: "8dd57dc993199c5f8a15b1dcda889def72c4a96a77bc8c5235a0bb83a5edc1c1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   boolean_selector:
     dependency: transitive
     description:
