@@ -16,7 +16,7 @@ void main() {
     ]);
 
     await tester.pumpWidget(
-        Row(children: model.cells.map((cell) => cell.child).toList())
+        Row(children: model.cells.map((cell) => cell.buildCell()).toList())
             .wrapDirectional());
 
     expect(model.cells.length, 2);
@@ -33,7 +33,7 @@ void main() {
     ]);
 
     await tester.pumpWidget(
-        Row(children: model.cells.map((cell) => cell.child).toList())
+        Row(children: model.cells.map((cell) => cell.buildCell()).toList())
             .wrapDirectional());
     expect(model.cells.length, 2);
     expect(find.text('Cell 1'), findsOneWidget);
@@ -50,7 +50,7 @@ void main() {
     ]);
 
     await tester.pumpWidget(
-        Row(children: model.cells.map((cell) => cell.child).toList())
+        Row(children: model.cells.map((cell) => cell.buildCell()).toList())
             .wrapDirectional());
 
     expect(model.cells.length, 2);
@@ -68,7 +68,7 @@ void main() {
     ], numberFormat: NumberFormat('#.##', 'de_DE'));
 
     await tester.pumpWidget(
-        Row(children: model.cells.map((cell) => cell.child).toList())
+        Row(children: model.cells.map((cell) => cell.buildCell()).toList())
             .wrapDirectional());
 
     expect(model.cells.length, 2);
@@ -86,7 +86,7 @@ void main() {
     ], numberFormat: NumberFormat.currency(locale: 'en_US', symbol: '\$'));
 
     await tester.pumpWidget(
-        Row(children: model.cells.map((cell) => cell.child).toList())
+        Row(children: model.cells.map((cell) => cell.buildCell()).toList())
             .wrapDirectional());
 
     expect(model.cells.length, 2);

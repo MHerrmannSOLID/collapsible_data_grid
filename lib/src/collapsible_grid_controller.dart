@@ -37,7 +37,7 @@ class CollapsibleGridController {
     for (var row in rowConfigurations) {
       int colIdx = 0;
       for (var cell in row.cells) {
-        cellStyleBuilder!(rowIdx, colIdx, cell);
+        cellStyleBuilder!(colIdx, rowIdx, cell);
         colIdx++;
       }
       rowIdx++;

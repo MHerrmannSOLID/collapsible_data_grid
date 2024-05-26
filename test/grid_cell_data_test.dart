@@ -12,7 +12,7 @@ void main() {
             backgroundColor: Color.fromARGB(100, 120, 160, 200),
             groupKey: 4711,
             child: const SizedBox(width: 10, height: 10))
-        .child
+        .buildCell()
         .wrapDirectional());
 
     var background =
@@ -29,7 +29,7 @@ void main() {
     await tester.pumpWidget(GridCellData<num>(
       groupKey: 123,
       child: Container(key: const Key('childElement')),
-    ).child.wrapDirectional());
+    ).buildCell().wrapDirectional());
 
     expect(find.byKey(const Key('childElement')), findsOneWidget);
   });

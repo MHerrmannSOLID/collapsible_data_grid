@@ -100,6 +100,47 @@ void main() {
   });
 
   test(
+      'Initializing a table model with a cellStyleBuilder'
+      '--> builder should be called for each elment', () {
+    List<StyleBuilderCallData> styledCells = [];
+    var model = CollapsibleGridController(
+      cellStyleBuilder: (colIdx, rowIdx, toStyle) => styledCells.add(
+        StyleBuilderCallData(colIdx, rowIdx, toStyle),
+      ),
+    );
+
+    model.initialize(defaultTestColumns, [
+      RowConfiguration<String>(cells: ['1', '2', '3']),
+      RowConfiguration<String>(cells: ['4', '5', '6']),
+    ]);
+
+    expect(styledCells.length, 6);
+  });
+
+  test(
+      'Initializing a table model with a cellStyleBuilder'
+      '--> row and column index are supplied correctly', () {
+    List<StyleBuilderCallData> styledCells = [];
+    var model = CollapsibleGridController(
+      cellStyleBuilder: (colIdx, rowIdx, toStyle) => styledCells.add(
+        StyleBuilderCallData(colIdx, rowIdx, toStyle),
+      ),
+    );
+
+    model.initialize(defaultTestColumns, [
+      RowConfiguration<String>(cells: ['1', '2', '3']),
+      RowConfiguration<String>(cells: ['4', '5', '6']),
+    ]);
+
+    expect(styledCells.findFirstWithText("1").rowIdx, 0);
+    expect(styledCells.findFirstWithText("1").colIdx, 0);
+    expect(styledCells.findFirstWithText("3").rowIdx, 0);
+    expect(styledCells.findFirstWithText("3").colIdx, 2);
+    expect(styledCells.findFirstWithText("5").rowIdx, 1);
+    expect(styledCells.findFirstWithText("5").colIdx, 1);
+  });
+
+  test(
       'Creating a simple table model with a single row'
       '--> Row count should be 1', () {
     var model = CollapsibleGridController();
@@ -108,4 +149,22 @@ void main() {
     ]);
     expect(model.rowConfigurations.length, 1);
   });
+}
+
+class StyleBuilderCallData {
+  final int colIdx;
+  final int rowIdx;
+  final GridCellData toStyle;
+
+  StyleBuilderCallData(this.colIdx, this.rowIdx, this.toStyle);
+
+  bool hasText(String text) {
+    if (toStyle.child is! Text) return false;
+    return (toStyle.child as Text).data == text;
+  }
+}
+
+extension StyleBuilderCallDataFinder on List<StyleBuilderCallData> {
+  StyleBuilderCallData findFirstWithText(String text) =>
+      firstWhere((element) => element.hasText(text));
 }
