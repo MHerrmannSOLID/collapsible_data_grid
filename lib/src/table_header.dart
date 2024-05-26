@@ -6,7 +6,7 @@ class TableHeader extends StatelessWidget {
   const TableHeader({required this.columns, Color? headerBackground, super.key})
       : _headerBackground = headerBackground ?? Colors.white;
 
-  final List<ColumnConfiguration> columns;
+  final Iterable<ColumnConfiguration> columns;
   final Color _headerBackground;
 
   @override

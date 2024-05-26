@@ -133,8 +133,6 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    var cell = tester.firstWidget(find.byKey(const Key('cell1')));
-
     expect(find.byKey(const Key('cell1')), findsOneWidget);
     expect(find.byKey(const Key('cell2')), findsOneWidget);
     expect(find.byKey(const Key('cell3')), findsOneWidget);

@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'table_grid_cell.dart';
 
 class StaticTableRow extends StatelessWidget {
-  const StaticTableRow(
-      {required this.columnConfigurations, required this.rowData, super.key});
+  StaticTableRow(
+      {required Iterable<ColumnConfiguration> columnConfigurations,
+      required this.rowData,
+      super.key})
+      : columnConfigurations = columnConfigurations.toList();
 
   final RowConfiguration rowData;
   final List<ColumnConfiguration> columnConfigurations;

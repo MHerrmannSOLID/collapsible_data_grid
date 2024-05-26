@@ -7,7 +7,7 @@ class ExpandableTableRow extends StatelessWidget {
       {required this.columnConfigurations, required this.data, super.key});
 
   final ExpandableRow data;
-  final List<ColumnConfiguration> columnConfigurations;
+  final Iterable<ColumnConfiguration> columnConfigurations;
 
   @override
   Widget build(BuildContext context) {

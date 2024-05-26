@@ -2,7 +2,10 @@ import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 import 'package:collapsible_data_grid_example/src/demo_app_bar.dart';
 import 'package:collapsible_data_grid_example/src/data/projects_data_factory.dart';
 import 'package:collapsible_data_grid_example/src/material_style_table/table_model.dart';
+import 'package:expandable/expandable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class MaterialStyleTable extends StatefulWidget {
   const MaterialStyleTable({super.key, required this.title});
@@ -49,22 +52,37 @@ class _MaterialStyleTableState extends State<MaterialStyleTable>
         title: DemoAppBar(),
       ),
       body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return Center(
-              child: SizedBox(
-                width: constraints.maxWidth * 0.90,
-                height: constraints.maxHeight * 0.90,
-                child: CollapsibleDataGrid(
-                  columnConfigurations: model.columns,
-                  rowConfigurations: model.rows,
-                  controller: tableController,
-                ),
+          child: Column(
+        children: [
+          Container(
+            height: 70,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                child: const Text("fold"),
+                onPressed: () => tableController.collapseColumn(columnIdx: 4),
               ),
-            );
-          },
-        ),
-      ),
+            ),
+          ),
+          Expanded(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return Center(
+                  child: SizedBox(
+                    width: constraints.maxWidth * 0.90,
+                    height: constraints.maxHeight * 0.90,
+                    child: CollapsibleDataGrid(
+                      columnConfigurations: model.columns,
+                      rowConfigurations: model.rows,
+                      controller: tableController,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      )),
     );
   }
 }
