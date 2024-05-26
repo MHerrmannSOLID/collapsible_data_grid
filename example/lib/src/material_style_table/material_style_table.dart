@@ -24,10 +24,12 @@ class MaterialStyleTable extends StatefulWidget {
 
 class _MaterialStyleTableState extends State<MaterialStyleTable>
     with SingleTickerProviderStateMixin {
-  var model = TableModel();
+  var model;
+  final tableController = CollapsibleGridController();
 
   @override
   void initState() {
+    model = TableModel();
     _getTableData();
     super.initState();
   }
@@ -35,9 +37,8 @@ class _MaterialStyleTableState extends State<MaterialStyleTable>
   Future<void> _getTableData() async {
     var tasksModel = await ProjectsDataFactory.createFromAsset(
         assetPath: 'assets/project_sample_data.txt');
-    setState(() {
-      model = TableModel.formProjectsData(tasksModel);
-    });
+    model = TableModel.formProjectsData(tasksModel);
+    setState(() {});
   }
 
   @override
@@ -51,14 +52,13 @@ class _MaterialStyleTableState extends State<MaterialStyleTable>
         child: LayoutBuilder(
           builder: (context, constraints) {
             return Center(
-              child: Container(
-                child: SizedBox(
-                  width: constraints.maxWidth * 0.90,
-                  height: constraints.maxHeight * 0.90,
-                  child: CollapsibleDataGrid(
-                      columnConfigurations: model.columns,
-                      rowConfigurations: model.rows,
-                      controller: CollapsibleGridController()),
+              child: SizedBox(
+                width: constraints.maxWidth * 0.90,
+                height: constraints.maxHeight * 0.90,
+                child: CollapsibleDataGrid(
+                  columnConfigurations: model.columns,
+                  rowConfigurations: model.rows,
+                  controller: tableController,
                 ),
               ),
             );

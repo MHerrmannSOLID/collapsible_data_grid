@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'types/expandable_row.dart';
 import 'types/row_configuration.dart';
 
-class CollapsibleDataGrid extends StatefulWidget {
+class CollapsibleDataGrid extends StatelessWidget {
   final CollapsibleGridController controller;
   final headerHeight = 50.0;
   final Color _bodyBackground;
@@ -25,32 +25,21 @@ class CollapsibleDataGrid extends StatefulWidget {
         _headerBackground = headerBackground ?? Colors.white;
 
   @override
-  State<StatefulWidget> createState() => CollapsibleDataGridState();
-}
-
-class CollapsibleDataGridState extends State<CollapsibleDataGrid> {
-  @override
-  void initState() {
-    super.initState();
-    widget.controller
-        .initialize(widget.columnConfigurations, widget.rowConfigurations);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    controller.initialize(columnConfigurations, rowConfigurations);
     return LayoutBuilder(
       builder: (context, constraints) {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TableHeader(
-                columns: widget.controller.columnConfigurations,
-                headerBackground: widget._headerBackground),
+                columns: controller.columnConfigurations,
+                headerBackground: _headerBackground),
             Container(
-              height: constraints.maxHeight - widget.headerHeight,
-              color: widget._bodyBackground,
+              height: constraints.maxHeight - headerHeight,
+              color: _bodyBackground,
               child: ListView(
-                children: widget.controller.rowConfigurations
+                children: controller.rowConfigurations
                     .map((rowData) => _createTileFrom(rowData))
                     .toList(),
               ),
@@ -63,9 +52,8 @@ class CollapsibleDataGridState extends State<CollapsibleDataGrid> {
 
   Widget _createTileFrom(RowConfiguration data) => (data.isExpandable)
       ? ExpandableTableRow(
-          columnConfigurations: widget.controller.columnConfigurations,
+          columnConfigurations: controller.columnConfigurations,
           data: data as ExpandableRow)
       : StaticTableRow(
-          columnConfigurations: widget.controller.columnConfigurations,
-          rowData: data);
+          columnConfigurations: controller.columnConfigurations, rowData: data);
 }

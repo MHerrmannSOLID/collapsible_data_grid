@@ -6,11 +6,10 @@ import 'package:intl/intl.dart';
 
 class TableModel {
   final TextStyle headerFont = GoogleFonts.rubik(
-      textStyle: TextStyle(fontWeight: FontWeight.normal, fontSize: 20));
+      textStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 20));
   final TextStyle bodyFont = GoogleFonts.rubik(
-      textStyle: TextStyle(fontWeight: FontWeight.normal, fontSize: 16));
+      textStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 16));
   late final List<ColumnConfiguration> columns;
-
   final outputFormat = DateFormat('dd/MM/yyyy');
 
   late final List<RowConfiguration> rows;
