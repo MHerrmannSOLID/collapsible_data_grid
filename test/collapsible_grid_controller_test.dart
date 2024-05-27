@@ -39,6 +39,7 @@ void main() {
 
       model.collapseColumn(columnIdx: 1);
       expect(hasChanged, true);
+      expect(model.rowConfigurations.last, isA<ExpandableRow>());
     });
 
     test(

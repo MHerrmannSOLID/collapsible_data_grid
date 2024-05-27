@@ -32,11 +32,15 @@ class RowCollapseService {
         var expandableRow = ExpandableRow<GridCellData>(
             cells: node.rows.first.rowConfiguration.cells,
             children: node.rows.map((e) => e.rowConfiguration).toList());
+
+        var previouosNode = node.rows.first.previous;
+
         for (var item in node.rows) {
           allRowsLinkedList.remove(item);
         }
-        if (node.rows.first.previous != null)
-          node.rows.first.previous?.insertAfter(RowEntryItem(expandableRow));
+
+        if (previouosNode != null)
+          previouosNode.insertAfter(RowEntryItem(expandableRow));
         else
           allRowsLinkedList.addFirst(RowEntryItem(expandableRow));
       }
