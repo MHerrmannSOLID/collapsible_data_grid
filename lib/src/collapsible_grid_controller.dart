@@ -98,7 +98,7 @@ class CollapsibleGridController extends ChangeNotifier {
     }
     if (!hadFoldedRows) return;
 
-    btree.forEach((node) {
+    for (var node in btree) {
       if (node.rows.length > 1) {
         var expandableRow = ExpandableRow<GridCellData>(
             cells: node.rows.first.rowConfiguration.cells,
@@ -111,7 +111,7 @@ class CollapsibleGridController extends ChangeNotifier {
         else
           allRowsLinkedList.addFirst(RowEntryItem(expandableRow));
       }
-    });
+    }
     _rowConfigurations =
         allRowsLinkedList.map((e) => e.rowConfiguration).toList();
     notifyListeners();

@@ -1,9 +1,9 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
-import 'package:collapsible_data_grid/src/static_table_row.dart';
+import 'package:collapsible_data_grid/src/widgets/static_table_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'test_helper.dart';
+import '../test_helper.dart';
 
 void main() {
   var testColumns = <ColumnConfiguration>[

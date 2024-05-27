@@ -1,10 +1,10 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
-import 'package:collapsible_data_grid/src/expandable_table_row.dart';
-import 'package:collapsible_data_grid/src/static_table_row.dart';
-import 'package:collapsible_data_grid/src/table_header.dart';
+import 'package:collapsible_data_grid/src/widgets/expandable_table_row.dart';
+import 'package:collapsible_data_grid/src/widgets/static_table_row.dart';
+import 'package:collapsible_data_grid/src/widgets/table_header.dart';
 import 'package:flutter/material.dart';
-import 'types/expandable_row.dart';
-import 'types/row_configuration.dart';
+import '../types/expandable_row.dart';
+import '../types/row_configuration.dart';
 
 class CollapsibleDataGrid extends StatelessWidget {
   final CollapsibleGridController controller;

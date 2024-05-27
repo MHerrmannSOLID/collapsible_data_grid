@@ -1,5 +1,5 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
-import 'package:collapsible_data_grid/src/decorated_cell.dart';
+import 'package:collapsible_data_grid/src/widgets/decorated_cell.dart';
 import 'package:flutter/material.dart';
 
 class TableGridCell extends StatelessWidget {

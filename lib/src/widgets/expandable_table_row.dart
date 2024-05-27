@@ -1,5 +1,5 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
-import 'package:collapsible_data_grid/src/static_table_row.dart';
+import 'package:collapsible_data_grid/src/widgets/static_table_row.dart';
 import 'package:flutter/material.dart';
 
 class ExpandableTableRow extends StatelessWidget {
