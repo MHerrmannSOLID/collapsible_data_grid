@@ -1,5 +1,3 @@
-import 'dart:collection';
-import 'package:binary_tree/binary_tree.dart';
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 import 'package:collapsible_data_grid/src/row_collapse_service.dart';
 import 'package:flutter/material.dart';
@@ -90,10 +88,4 @@ class CollapsibleGridController extends ChangeNotifier {
     _rowConfigurations = foldingService.collapedRows;
     notifyListeners();
   }
-}
-
-final class RowEntryItem extends LinkedListEntry<RowEntryItem> {
-  final RowConfiguration rowConfiguration;
-
-  RowEntryItem(this.rowConfiguration);
 }

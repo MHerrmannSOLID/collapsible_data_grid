@@ -21,21 +21,12 @@ class RowCollapseService {
       allRowsLinkedList.map((e) => e.rowConfiguration).toList();
 
   void foldRowsBy({required int columnIdx}) {
-    for (var row in rowConfigurations) {
-      var acrRow = RowEntryItem(row);
-      var collapseColumn = row.cells[columnIdx];
-      allRowsLinkedList.add(acrRow);
-      var toAdd = TreeNode(collapseColumn, <RowEntryItem>[acrRow]);
-      var node = btree.search(toAdd);
-      if (node != null) {
-        _hadFoldedRows = true;
-        node.rows.add(acrRow);
-      } else {
-        btree.insert(toAdd);
-      }
-    }
+    _analyseStructure(columnIdx);
     if (!hadFoldedRows) return;
+    _foldStructure();
+  }
 
+  void _foldStructure() {
     for (var node in btree) {
       if (node.rows.length > 1) {
         var expandableRow = ExpandableRow<GridCellData>(
@@ -51,6 +42,22 @@ class RowCollapseService {
       }
     }
   }
+
+  void _analyseStructure(int columnIdx) {
+    for (var row in rowConfigurations) {
+      var acrRow = RowEntryItem(row);
+      var collapseColumn = row.cells[columnIdx];
+      allRowsLinkedList.add(acrRow);
+      var toAdd = TreeNode(collapseColumn, <RowEntryItem>[acrRow]);
+      var node = btree.search(toAdd);
+      if (node != null) {
+        _hadFoldedRows = true;
+        node.rows.add(acrRow);
+      } else {
+        btree.insert(toAdd);
+      }
+    }
+  }
 }
 
 class TreeNode implements Comparable {
@@ -59,6 +66,7 @@ class TreeNode implements Comparable {
 
   TreeNode(this.data, this.rows);
 
+  @override
   operator ==(other) => compareTo(other) == 0;
 
   @override
@@ -68,4 +76,10 @@ class TreeNode implements Comparable {
     }
     return -1;
   }
+}
+
+final class RowEntryItem extends LinkedListEntry<RowEntryItem> {
+  final RowConfiguration rowConfiguration;
+
+  RowEntryItem(this.rowConfiguration);
 }
