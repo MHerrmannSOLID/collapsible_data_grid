@@ -4,7 +4,7 @@ import 'package:binary_tree/binary_tree.dart';
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 
 class RowCollapseService {
-  final CellStyleBuilder? cellStyleBuilder;
+  final CollapseHeaderBuilder? collapseHeaderBuilder;
   final List<RowConfiguration> rowConfigurations;
 
   var _hadFoldedRows = false;
@@ -12,7 +12,7 @@ class RowCollapseService {
   var btree = BinaryTree<TreeNode>();
 
   RowCollapseService({
-    required this.cellStyleBuilder,
+    required this.collapseHeaderBuilder,
     required this.rowConfigurations,
   });
 
@@ -29,9 +29,7 @@ class RowCollapseService {
   void _foldStructure() {
     for (var node in btree) {
       if (node.rows.length > 1) {
-        var expandableRow = ExpandableRow<GridCellData>(
-            cells: node.rows.first.rowConfiguration.cells,
-            children: node.rows.map((e) => e.rowConfiguration).toList());
+        var expandableRow = _createExpandableRow(node);
 
         var previouosNode = node.rows.first.previous;
 
@@ -45,6 +43,13 @@ class RowCollapseService {
           allRowsLinkedList.addFirst(RowEntryItem(expandableRow));
       }
     }
+  }
+
+  ExpandableRow<GridCellData<Comparable<dynamic>>> _createExpandableRow(
+      TreeNode node) {
+    var childRows = node.rows.map((e) => e.rowConfiguration).toList();
+    return ExpandableRow<GridCellData>(
+        cells: collapseHeaderBuilder!(childRows), children: childRows);
   }
 
   void _analyseStructure(int columnIdx) {

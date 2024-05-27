@@ -2,8 +2,8 @@ import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 import 'package:collapsible_data_grid/src/row_collapse_service.dart';
 import 'package:flutter/material.dart';
 
-typedef CollapseHeaderBuilder = Widget Function(
-    BuildContext context, List<RowConfiguration> rows);
+typedef CollapseHeaderBuilder = List<GridCellData> Function(
+    List<RowConfiguration> rows);
 
 typedef CellStyleBuilder = void Function(
     int colIdx, int rowIdx, GridCellData toStyle);
@@ -19,9 +19,9 @@ class CollapsibleGridController extends ChangeNotifier {
   final CellStyleBuilder? cellStyleBuilder;
   final int groupingColumnIndex;
 
-  static Widget _defaultCollapseHeaderBuilder(
-      BuildContext context, List<RowConfiguration> rows) {
-    return Container();
+  static List<GridCellData> _defaultCollapseHeaderBuilder(
+      List<RowConfiguration> rows) {
+    return rows.first.cells;
   }
 
   CollapsibleGridController(
@@ -79,7 +79,7 @@ class CollapsibleGridController extends ChangeNotifier {
 
   void collapseColumn({required int columnIdx}) {
     var foldingService = RowCollapseService(
-        cellStyleBuilder: cellStyleBuilder,
+        collapseHeaderBuilder: collapseHeaderBuilder,
         rowConfigurations: _originalRowConfigurations);
     foldingService.foldRowsBy(columnIdx: columnIdx);
 
