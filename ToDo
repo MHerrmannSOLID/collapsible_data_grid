@@ -1,0 +1,7 @@
+Additional features backlog:
+- removing the requirement that rows have the exact same compareable type (e.g. all numbers or all strings)
+  cuz then data types can be mixed in the same row but however the should be strict regarding the columns.
+- make the table more adaptive to the screen size changes
+  - having priorities for columns so that some columns are hidden when the screen size is small
+  - adding a min size for the columns so that the will be a scroll bar when the screen size is small
+- since compareable is already implemented, sorting is also a quick feature to add
