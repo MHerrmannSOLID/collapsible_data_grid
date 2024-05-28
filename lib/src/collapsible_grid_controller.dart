@@ -1,5 +1,5 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
-import 'package:collapsible_data_grid/src/row_collapse_service.dart';
+import 'package:collapsible_data_grid/src/services/row_collapse/row_collapse_service.dart';
 import 'package:flutter/material.dart';
 
 typedef CollapseHeaderBuilder = List<GridCellData> Function(

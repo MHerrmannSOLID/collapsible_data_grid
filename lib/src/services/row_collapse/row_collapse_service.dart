@@ -1,27 +1,28 @@
 import 'dart:collection';
-
+import 'package:collapsible_data_grid/src/types/row_entry_item.dart';
+import 'binary_tree_tools.dart';
 import 'package:binary_tree/binary_tree.dart';
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 
 class RowCollapseService {
-  final CollapseHeaderBuilder? collapseHeaderBuilder;
+  final CollapseHeaderBuilder _collapseHeaderBuilder;
   final List<RowConfiguration> rowConfigurations;
 
   var _hadFoldedRows = false;
   var allRowsLinkedList = LinkedList<RowEntryItem>();
-  var btree = BinaryTree<TreeNode>();
+  var btree = BinaryTree<RowsTreeNode>();
 
   RowCollapseService({
-    required this.collapseHeaderBuilder,
+    required CollapseHeaderBuilder collapseHeaderBuilder,
     required this.rowConfigurations,
-  });
+  }) : _collapseHeaderBuilder = collapseHeaderBuilder;
 
   bool get hadFoldedRows => _hadFoldedRows;
   List<RowConfiguration> get collapedRows =>
       allRowsLinkedList.map((e) => e.rowConfiguration).toList();
 
   void foldRowsBy({required int columnIdx}) {
-    _analyseStructure(columnIdx);
+    _initDataStructures(columnIdx);
     if (!hadFoldedRows) return;
     _foldStructure();
   }
@@ -46,18 +47,24 @@ class RowCollapseService {
   }
 
   ExpandableRow<GridCellData<Comparable<dynamic>>> _createExpandableRow(
-      TreeNode node) {
+      RowsTreeNode node) {
     var childRows = node.rows.map((e) => e.rowConfiguration).toList();
     return ExpandableRow<GridCellData>(
-        cells: collapseHeaderBuilder!(childRows), children: childRows);
+        cells: _collapseHeaderBuilder!(childRows), children: childRows);
   }
 
-  void _analyseStructure(int columnIdx) {
+  // This method creates both the binary tree and the linked list
+  // So strictly seen it does two things, but it's still kept
+  // in one method because then we just need to itrerate once
+  // over the rowConfigurations.
+  void _initDataStructures(int columnIdx) {
     for (var row in rowConfigurations) {
       var acrRow = RowEntryItem(row);
       var collapseColumn = row.cells[columnIdx];
       allRowsLinkedList.add(acrRow);
-      var toAdd = TreeNode(collapseColumn, <RowEntryItem>[acrRow]);
+      var toAdd = RowsTreeNode(collapseColumn, <RowEntryItem>[acrRow]);
+      // Map test = {};
+      // test.putIfAbsent(key, () => nu7ll)
       var node = btree.search(toAdd);
       if (node != null) {
         _hadFoldedRows = true;
@@ -67,28 +74,4 @@ class RowCollapseService {
       }
     }
   }
-}
-
-class TreeNode implements Comparable {
-  final GridCellData data;
-  final List<RowEntryItem> rows;
-
-  TreeNode(this.data, this.rows);
-
-  @override
-  operator ==(other) => compareTo(other) == 0;
-
-  @override
-  int compareTo(other) {
-    if (other is TreeNode) {
-      return data.compareTo(other.data);
-    }
-    return -1;
-  }
-}
-
-final class RowEntryItem extends LinkedListEntry<RowEntryItem> {
-  final RowConfiguration rowConfiguration;
-
-  RowEntryItem(this.rowConfiguration);
 }

@@ -79,11 +79,10 @@ void main() {
     test(
         'Collapsing the table model at column 1'
         '--> The header builder result will be applied.', () {
-      var wasHeaderBuilderCalled = false;
       var model = CollapsibleGridController(
           collapseHeaderBuilder: (rows) => <GridCellData>[
                 GridCellData<num>(
-                    child: Text('Test'), colSpan: 1, groupKey: 4711),
+                    child: const Text('Test'), colSpan: 1, groupKey: 4711),
               ]);
       model.initialize(defaultTestColumns, [
         RowConfiguration<num>(cells: [1, 8, 3]),
