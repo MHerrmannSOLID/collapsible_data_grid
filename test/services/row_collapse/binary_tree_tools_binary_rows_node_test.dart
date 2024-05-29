@@ -11,7 +11,7 @@ void main() {
         'Comparing two nodes having the same key'
         '--> the equality oerator should return true', () {
       var node1 = RowsTreeNode(FakeCell(1), [
-        RowEntryItem(RowConfiguration<num>(cells: [1, 2, 3]))
+        RowEntryItem(RowConfiguration(cells: [1, 2, 3]))
       ]);
       var node2 = RowsTreeNode(FakeCell(1), []);
 
@@ -22,7 +22,7 @@ void main() {
         'Comparing two nodes having the different key'
         '--> the equality oerator should return false', () {
       var node1 = RowsTreeNode(FakeCell(2), [
-        RowEntryItem(RowConfiguration<num>(cells: [1, 2, 3]))
+        RowEntryItem(RowConfiguration(cells: [1, 2, 3]))
       ]);
       var node2 = RowsTreeNode(FakeCell(1), []);
 
@@ -33,10 +33,10 @@ void main() {
         'Comparing two nodes same but different key'
         '--> the equality oerator should return false', () {
       var node1 = RowsTreeNode(FakeCell(2), [
-        RowEntryItem(RowConfiguration<num>(cells: [1, 2, 3]))
+        RowEntryItem(RowConfiguration(cells: [1, 2, 3]))
       ]);
       var node2 = RowsTreeNode(FakeCell(1), [
-        RowEntryItem(RowConfiguration<num>(cells: [1, 2, 3]))
+        RowEntryItem(RowConfiguration(cells: [1, 2, 3]))
       ]);
 
       expect(node1 == node2, isFalse);

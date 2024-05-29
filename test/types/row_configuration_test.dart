@@ -27,7 +27,7 @@ void main() {
   testWidgets(
       'Creating a row configuration by strings only'
       '--> The strings will be wrapped into cell data', (tester) async {
-    var model = RowConfiguration<String>(cells: [
+    var model = RowConfiguration(cells: [
       'Cell 1',
       'Cell 2',
     ]);
@@ -62,7 +62,7 @@ void main() {
       'Creating a row configuration containing numbers and requesting german formatting'
       '--> The numbers will be wrapped into cell data and and correctly formated',
       (tester) async {
-    var model = RowConfiguration<num>(cells: [
+    var model = RowConfiguration(cells: [
       2.346,
       12,
     ], numberFormat: NumberFormat('#.##', 'de_DE'));
@@ -80,7 +80,7 @@ void main() {
       'Creating a row configuration containing numbers and requesting us currencie formatting'
       '--> The numbers will be wrapped into cell data and and correctly formated',
       (tester) async {
-    var model = RowConfiguration<num>(cells: [
+    var model = RowConfiguration(cells: [
       2.346,
       12,
     ], numberFormat: NumberFormat.currency(locale: 'en_US', symbol: '\$'));

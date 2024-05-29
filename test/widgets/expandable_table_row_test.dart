@@ -15,7 +15,7 @@ void main() {
   ];
 
   var expandableRows = <RowConfiguration>[
-    RowConfiguration<GridCellData<String>>(cells: [
+    RowConfiguration(cells: [
       GridCellData(
           child: const Text(
             'Cell 1',
@@ -29,7 +29,7 @@ void main() {
           ),
           groupKey: 'Cell 2'),
     ]),
-    RowConfiguration<GridCellData<String>>(cells: [
+    RowConfiguration(cells: [
       GridCellData(
           child: const Text(
             'Cell 3',
@@ -66,7 +66,7 @@ void main() {
     await tester.pumpWidget(Material(
       child: ExpandableTableRow(
         columnConfigurations: testColumns,
-        data: ExpandableRow<String>(
+        data: ExpandableRow(
           cells: headerRow,
           children: expandableRows,
         ),
@@ -83,7 +83,7 @@ void main() {
     await tester.pumpWidget(Material(
       child: ExpandableTableRow(
         columnConfigurations: testColumns,
-        data: ExpandableRow<String>(
+        data: ExpandableRow(
           cells: headerRow,
           children: [],
         ),
@@ -97,7 +97,7 @@ void main() {
       'Creating an expandable row '
       '--> The header StaticTableRow should get the expandeble model as data model',
       (tester) async {
-    var expandableRowModel = ExpandableRow<String>(
+    var expandableRowModel = ExpandableRow(
       cells: headerRow,
       children: [],
     );
@@ -121,7 +121,7 @@ void main() {
     await tester.pumpWidget(Material(
       child: ExpandableTableRow(
         columnConfigurations: testColumns,
-        data: ExpandableRow<String>(
+        data: ExpandableRow(
           cells: headerRow,
           children: expandableRows,
           controller: controller,

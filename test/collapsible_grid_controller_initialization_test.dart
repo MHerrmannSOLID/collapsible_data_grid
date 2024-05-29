@@ -112,8 +112,8 @@ void main() {
       );
 
       model.initialize(defaultTestColumns, [
-        RowConfiguration<String>(cells: ['1', '2', '3']),
-        RowConfiguration<String>(cells: ['4', '5', '6']),
+        RowConfiguration(cells: ['1', '2', '3']),
+        RowConfiguration(cells: ['4', '5', '6']),
       ]);
 
       expect(styledCells.length, 6);
@@ -130,8 +130,8 @@ void main() {
       );
 
       model.initialize(defaultTestColumns, [
-        RowConfiguration<String>(cells: ['1', '2', '3']),
-        RowConfiguration<String>(cells: ['4', '5', '6']),
+        RowConfiguration(cells: ['1', '2', '3']),
+        RowConfiguration(cells: ['4', '5', '6']),
       ]);
 
       expect(styledCells.findFirstWithText("1").rowIdx, 0);
@@ -148,9 +148,9 @@ void main() {
         () {
       var model = CollapsibleGridController();
       var rowConfigurations = [
-        RowConfiguration<num>(cells: [1, 2, 3]),
-        RowConfiguration<num>(cells: [4, 8, 6]),
-        RowConfiguration<num>(cells: [7, 8, 9]),
+        RowConfiguration(cells: ['1', 2, 3]),
+        RowConfiguration(cells: ['4', 8, 6]),
+        RowConfiguration(cells: ['7', 8, 9]),
       ];
 
       //initially we have 3 rows since we did not collapse the model
@@ -171,14 +171,14 @@ void main() {
         '--> Inner state will be resetted due to change of data', () {
       var model = CollapsibleGridController();
       var rowConfigurationsFirst = [
-        RowConfiguration<num>(cells: [1, 2, 3]),
-        RowConfiguration<num>(cells: [4, 8, 6]),
-        RowConfiguration<num>(cells: [7, 8, 9]),
+        RowConfiguration(cells: [1, '2', 3]),
+        RowConfiguration(cells: [4, '8', 6]),
+        RowConfiguration(cells: [7, '8', 9]),
       ];
       var rowConfigurationsSecond = [
-        RowConfiguration<num>(cells: [7, 2, 3]),
-        RowConfiguration<num>(cells: [4, 8, 6]),
-        RowConfiguration<num>(cells: [1, 8, 9]),
+        RowConfiguration(cells: [7, '2', 3]),
+        RowConfiguration(cells: [4, '8', 6]),
+        RowConfiguration(cells: [1, '8', 9]),
       ];
 
       //initially we have 3 rows since we did not collapse the model
@@ -199,7 +199,7 @@ void main() {
         '--> Row count should be 1', () {
       var model = CollapsibleGridController();
       model.initialize(defaultTestColumns, [
-        RowConfiguration<num>(cells: [1, 2, 3])
+        RowConfiguration(cells: [1, 2, 3])
       ]);
       expect(model.rowConfigurations.length, 1);
     });

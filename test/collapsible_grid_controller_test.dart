@@ -16,9 +16,9 @@ void main() {
       var hasChanged = false;
       var model = CollapsibleGridController();
       model.initialize(defaultTestColumns, [
-        RowConfiguration<num>(cells: [1, 2, 3]),
-        RowConfiguration<num>(cells: [4, 5, 6]),
-        RowConfiguration<num>(cells: [7, 8, 9]),
+        RowConfiguration(cells: [1, 2, 3]),
+        RowConfiguration(cells: [4, 5, 6]),
+        RowConfiguration(cells: [7, 8, 9]),
       ]);
       model.addListener(() => hasChanged = true);
 
@@ -32,9 +32,9 @@ void main() {
       var hasChanged = false;
       var model = CollapsibleGridController();
       model.initialize(defaultTestColumns, [
-        RowConfiguration<num>(cells: [1, 2, 3]),
-        RowConfiguration<num>(cells: [4, 8, 6]),
-        RowConfiguration<num>(cells: [7, 8, 9]),
+        RowConfiguration(cells: [1, 2, 3]),
+        RowConfiguration(cells: [4, 8, 6]),
+        RowConfiguration(cells: [7, 8, 9]),
       ]);
       model.addListener(() => hasChanged = true);
 
@@ -48,9 +48,9 @@ void main() {
         '--> First wor should be an expanable row.', () {
       var model = CollapsibleGridController();
       model.initialize(defaultTestColumns, [
-        RowConfiguration<num>(cells: [1, 8, 3]),
-        RowConfiguration<num>(cells: [4, 8, 6]),
-        RowConfiguration<num>(cells: [7, 2, 9]),
+        RowConfiguration(cells: [1, 8, 3]),
+        RowConfiguration(cells: [4, 8, 6]),
+        RowConfiguration(cells: [7, 2, 9]),
       ]);
 
       model.collapseColumn(columnIdx: 1);
@@ -67,9 +67,9 @@ void main() {
         return rows.first.cells;
       });
       model.initialize(defaultTestColumns, [
-        RowConfiguration<num>(cells: [1, 8, 3]),
-        RowConfiguration<num>(cells: [4, 8, 6]),
-        RowConfiguration<num>(cells: [7, 2, 9]),
+        RowConfiguration(cells: [1, 8, 3]),
+        RowConfiguration(cells: [4, 8, 6]),
+        RowConfiguration(cells: [7, 2, 9]),
       ]);
 
       model.collapseColumn(columnIdx: 1);
@@ -85,9 +85,9 @@ void main() {
                     child: const Text('Test'), colSpan: 1, groupKey: 4711),
               ]);
       model.initialize(defaultTestColumns, [
-        RowConfiguration<num>(cells: [1, 8, 3]),
-        RowConfiguration<num>(cells: [4, 8, 6]),
-        RowConfiguration<num>(cells: [7, 2, 9]),
+        RowConfiguration(cells: [1, 8, 3]),
+        RowConfiguration(cells: [4, 8, 6]),
+        RowConfiguration(cells: [7, 2, 9]),
       ]);
 
       model.collapseColumn(columnIdx: 1);

@@ -13,12 +13,14 @@ class CollapsibleDataGrid extends StatelessWidget {
   final Color _headerBackground;
   final List columnConfigurations;
   final List<RowConfiguration> rowConfigurations;
+  final int collapseByColumn;
 
   const CollapsibleDataGrid({
     super.key,
     required this.controller,
     required this.columnConfigurations,
     required this.rowConfigurations,
+    this.collapseByColumn = -1,
     Color? bodyBackground,
     Color? headerBackground,
   })  : _bodyBackground = bodyBackground ?? Colors.white,
@@ -27,6 +29,9 @@ class CollapsibleDataGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     controller.initialize(columnConfigurations, rowConfigurations);
+    if (collapseByColumn > -1) {
+      controller.collapseColumn(columnIdx: collapseByColumn);
+    }
     return LayoutBuilder(
       builder: (context, constraints) {
         return Column(

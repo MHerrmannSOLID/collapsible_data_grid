@@ -18,7 +18,7 @@ void main() {
         textDirection: TextDirection.ltr,
         child: StaticTableRow(
             columnConfigurations: testColumns,
-            rowData: RowConfiguration<GridCellData<num>>(cells: [
+            rowData: RowConfiguration(cells: [
               GridCellData(
                   child: const Text('Cell 1', key: Key('column1')),
                   groupKey: 1),
@@ -38,7 +38,7 @@ void main() {
         textDirection: TextDirection.ltr,
         child: StaticTableRow(
             columnConfigurations: testColumns,
-            rowData: RowConfiguration<GridCellData<num>>(cells: [
+            rowData: RowConfiguration(cells: [
               GridCellData(
                 child: Container(
                   width: double.infinity,
@@ -74,7 +74,7 @@ void main() {
               ColumnConfiguration(header: Container(), weight: 2),
               ColumnConfiguration(header: Container(), weight: 1),
             ],
-            rowData: RowConfiguration<GridCellData<num>>(cells: [
+            rowData: RowConfiguration(cells: [
               GridCellData(
                 child: Container(
                   width: double.infinity,
@@ -102,16 +102,12 @@ void main() {
     await tester.pumpWidget(
       StaticTableRow(
         columnConfigurations: testColumns,
-        rowData: RowConfiguration<GridCellData<num>>(
-            onTap: (context) => wasTapped = true,
-            cells: [
-              GridCellData(
-                  child: const Text('Cell 1', key: Key('column1')),
-                  groupKey: 1),
-              GridCellData(
-                  child: const Text('Cell 2', key: Key('column2')),
-                  groupKey: 2),
-            ]),
+        rowData: RowConfiguration(onTap: (context) => wasTapped = true, cells: [
+          GridCellData(
+              child: const Text('Cell 1', key: Key('column1')), groupKey: 1),
+          GridCellData(
+              child: const Text('Cell 2', key: Key('column2')), groupKey: 2),
+        ]),
       ).wrapDirectional(),
     );
 
@@ -134,7 +130,7 @@ void main() {
               ColumnConfiguration(header: Container(), weight: 1),
               ColumnConfiguration(header: Container(), weight: 1),
             ],
-            rowData: RowConfiguration<GridCellData<num>>(cells: [
+            rowData: RowConfiguration(cells: [
               GridCellData(
                 colSpan: 2,
                 child: Container(

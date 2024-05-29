@@ -18,9 +18,9 @@ void main() {
         return dummyCollapseReturn;
       },
       rowConfigurations: [
-        RowConfiguration<num>(cells: [1, 2, 3]),
-        RowConfiguration<num>(cells: [3, 4, 5]),
-        RowConfiguration<num>(cells: [6, 7, 7]),
+        RowConfiguration(cells: [1, 2, 3]),
+        RowConfiguration(cells: [3, 4, 5]),
+        RowConfiguration(cells: [6, 7, 7]),
       ],
     );
 
@@ -40,9 +40,9 @@ void main() {
         return dummyCollapseReturn;
       },
       rowConfigurations: [
-        RowConfiguration<num>(cells: [1, 2, 3]),
-        RowConfiguration<num>(cells: [3, 4, 5]),
-        RowConfiguration<num>(cells: [3, 7, 7]),
+        RowConfiguration(cells: [1, 2, 3]),
+        RowConfiguration(cells: [3, 4, 5]),
+        RowConfiguration(cells: [3, 7, 7]),
       ],
     );
 
@@ -60,9 +60,9 @@ void main() {
         return dummyCollapseReturn;
       },
       rowConfigurations: [
-        RowConfiguration<num>(cells: [3, 2, 3]),
-        RowConfiguration<num>(cells: [3, 4, 5]),
-        RowConfiguration<num>(cells: [2, 7, 7]),
+        RowConfiguration(cells: [3, 2, 3]),
+        RowConfiguration(cells: [3, 4, 5]),
+        RowConfiguration(cells: [2, 7, 7]),
       ],
     );
 

@@ -30,17 +30,17 @@ void main() {
     await tester.pumpWidget(CollapsibleDataGrid(
       columnConfigurations: testColumns,
       rowConfigurations: [
-        RowConfiguration<GridCellData<String>>(cells: [
+        RowConfiguration(cells: [
           GridCellData(child: const Text('Cell 1'), groupKey: 'Cell 1'),
           GridCellData(child: const Text('Cell 2'), groupKey: 'Cell 2'),
         ]),
-        RowConfiguration<GridCellData<String>>(
+        RowConfiguration(
           cells: [
             GridCellData(child: const Text('Cell 3'), groupKey: 'Cell 3'),
             GridCellData(child: const Text('Cell 4'), groupKey: 'Cell 4'),
           ],
         ),
-        RowConfiguration<GridCellData<String>>(
+        RowConfiguration(
           cells: [
             GridCellData(child: const Text('Cell 5'), groupKey: 'Cell 5'),
             GridCellData(child: const Text('Cell 6'), groupKey: 'Cell 6'),
@@ -61,17 +61,17 @@ void main() {
     await tester.pumpWidget(CollapsibleDataGrid(
       columnConfigurations: testColumns,
       rowConfigurations: [
-        RowConfiguration<GridCellData<String>>(cells: [
+        RowConfiguration(cells: [
           GridCellData(child: const Text('Cell 1'), groupKey: 'Cell 1'),
           GridCellData(child: const Text('Cell 2'), groupKey: 'Cell 2'),
         ]),
-        RowConfiguration<GridCellData<String>>(
+        RowConfiguration(
           cells: [
             GridCellData(child: const Text('Cell 3'), groupKey: 'Cell 3'),
             GridCellData(child: const Text('Cell 4'), groupKey: 'Cell 4'),
           ],
         ),
-        RowConfiguration<GridCellData<String>>(
+        RowConfiguration(
           cells: [
             GridCellData(child: const Text('Cell 5'), groupKey: 'Cell 5'),
             GridCellData(child: const Text('Cell 6'), groupKey: 'Cell 6'),
@@ -91,11 +91,11 @@ void main() {
       child: CollapsibleDataGrid(
         columnConfigurations: testColumns,
         rowConfigurations: [
-          RowConfiguration<GridCellData<String>>(cells: [
+          RowConfiguration(cells: [
             GridCellData(child: const Text('Cell 1'), groupKey: 'Cell 1'),
             GridCellData(child: const Text('Cell 2'), groupKey: 'Cell 2'),
           ]),
-          ExpandableRow<GridCellData<String>>(
+          ExpandableRow(
             cells: [
               GridCellData<String>(
                   child: const Text('Cell 3'), groupKey: 'Cell 3'),
@@ -103,13 +103,13 @@ void main() {
                   child: const Text('Cell 4'), groupKey: 'Cell 4'),
             ],
             children: [
-              RowConfiguration<GridCellData<String>>(cells: [
+              RowConfiguration(cells: [
                 GridCellData(child: const Text('Cell 5'), groupKey: 'Cell 5'),
                 GridCellData(child: const Text('Cell 6'), groupKey: 'Cell 6'),
               ]),
             ],
           ),
-          RowConfiguration<GridCellData<String>>(
+          RowConfiguration(
             cells: [
               GridCellData(child: const Text('Cell 7'), groupKey: 'Cell 7'),
               GridCellData(child: const Text('Cell 8'), groupKey: 'Cell 8'),
