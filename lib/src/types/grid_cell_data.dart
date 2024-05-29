@@ -1,7 +1,7 @@
 import 'package:collapsible_data_grid/src/types/cell_border_configuration.dart';
 import 'package:flutter/material.dart';
 
-class GridCellData<TGroupKey extends Comparable<TGroupKey>>
+class GridCellData<TGroupKey extends Comparable>
     implements Comparable<GridCellData<TGroupKey>> {
   final Widget child;
   CellBorderConfiguration borderConfiguration;

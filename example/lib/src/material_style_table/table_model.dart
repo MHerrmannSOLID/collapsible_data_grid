@@ -37,7 +37,7 @@ class TableModel {
             _standardCell(Text(e.workOrder, style: bodyFont), e.workOrder),
             _standardCell(Text(e.district, style: bodyFont), e.district),
             _standardCell(Text(e.leadTech, style: bodyFont), e.leadTech),
-            _standardCell(Icon(e.service, size: 30), e.service.toString()),
+            _standardCell(Icon(e.service, size: 30), 1 as num),
             _standardCell(Text(outputFormat.format(e.reqDate), style: bodyFont),
                 e.reqDate),
             _standardCell(

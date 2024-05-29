@@ -38,11 +38,11 @@ class _SimpleTableState extends State<SimpleTable> {
       'Column 3',
     ];
     var rowConfigurations = [
-      RowConfiguration<String>(
+      RowConfiguration(
           cells: ['Row 1, Column 1', 'Row 1, Column 2', 'Row 1, Column 3']),
-      RowConfiguration<String>(
+      RowConfiguration(
           cells: ['Row 2, Column 1', 'Row 2, Column 2', 'Row 2, Column 3']),
-      RowConfiguration<String>(
+      RowConfiguration(
           cells: ['Row 3, Column 1', 'Row 3, Column 2', 'Row 3, Column 3']),
     ];
 

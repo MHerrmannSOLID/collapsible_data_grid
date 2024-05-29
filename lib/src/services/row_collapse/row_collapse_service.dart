@@ -64,18 +64,17 @@ class RowCollapseService {
 
   bool _isNotCollapsible(RowsTreeNode node) => node.rows.length == 1;
 
-  void _insertNewRowIntoList(RowEntryItem? previouosNode,
-      ExpandableRow<GridCellData<Comparable<dynamic>>> expandableRow) {
+  void _insertNewRowIntoList(
+      RowEntryItem? previouosNode, ExpandableRow expandableRow) {
     if (previouosNode != null)
       previouosNode.insertAfter(RowEntryItem(expandableRow));
     else
       allRowsLinkedList.addFirst(RowEntryItem(expandableRow));
   }
 
-  ExpandableRow<GridCellData<Comparable<dynamic>>> _createExpandableRow(
-      RowsTreeNode node) {
+  ExpandableRow _createExpandableRow(RowsTreeNode node) {
     var childRows = node.rows.map((e) => e.rowConfiguration).toList();
-    return ExpandableRow<GridCellData>(
+    return ExpandableRow(
         cells: _collapseHeaderBuilder(childRows), children: childRows);
   }
 

@@ -2,7 +2,7 @@ import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class RowConfiguration<TGroupKey extends Comparable<TGroupKey>> {
+class RowConfiguration {
   static final defaultNumberFormat = NumberFormat('#.#');
   final List<GridCellData> cells = [];
   final bool isExpandable;
@@ -10,7 +10,7 @@ class RowConfiguration<TGroupKey extends Comparable<TGroupKey>> {
   final void Function(BuildContext context)? onTap;
 
   RowConfiguration(
-      {required List<TGroupKey> cells, this.onTap, NumberFormat? numberFormat})
+      {required List cells, this.onTap, NumberFormat? numberFormat})
       : isExpandable = false,
         numberFormat = numberFormat ?? defaultNumberFormat {
     this.cells.addAll(cells.map((cell) => _mapToGridCellData(cell)).toList());
@@ -18,7 +18,7 @@ class RowConfiguration<TGroupKey extends Comparable<TGroupKey>> {
 
   GridCellData _mapToGridCellData(dynamic cell) => (cell is GridCellData)
       ? cell
-      : GridCellData<TGroupKey>(
+      : GridCellData<Comparable>(
           child: _mapToWidget(cell),
           groupKey: cell,
           backgroundColor: Colors.white);
