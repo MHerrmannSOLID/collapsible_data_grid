@@ -1,3 +1,5 @@
+![Batdge test](https://github.com/MHerrmannSOLID/collapsible_data_gridactions/workflows/main.yml/badge.svg)
+
 # Yet Another Data Grid  
 
 Yet another data grid ... but why for god's sake? Basically because we needed a data grid for our project that can be grouped by column content, such as the same date, same amount/value, same operator, same project, etc., and then collapse all affected rows into a single expandable row. 
