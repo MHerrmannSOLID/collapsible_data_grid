@@ -1,4 +1,4 @@
-![main_build](https://github.com/MHerrmannSOLID/collapsible_data_grid/actions/workflows/dart.yml/badge.svg) ![Coverage](./coverage_badge.svg)
+![main_build](https://github.com/MHerrmannSOLID/collapsible_data_grid/actions/workflows/dart.yml/badge.svg) [![codecov](https://codecov.io/github/MHerrmannSOLID/collapsible_data_grid/graph/badge.svg?token=C0Q6V8F9FO)](https://codecov.io/github/MHerrmannSOLID/collapsible_data_grid)
 
 # Yet Another Data Grid  
 
