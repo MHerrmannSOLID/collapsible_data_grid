@@ -48,11 +48,12 @@ jobs:
       - name: Run coverage
         run: flutter test --coverage
 
-      - uses: gaelgirodon/ci-badges-action@v1  
+      - name: Badgeing      
+        uses: gaelgirodon/ci-badges-action@v1  
         with:
+          working-directory: ./coverage
           gist-id: 40258b2e5b92b1424c22d5a036dd1a8e
           token: ${{ secrets.CI_GIST }}
-      - name: Badgeing
-        working-directory: ./coverage
+
       
     
