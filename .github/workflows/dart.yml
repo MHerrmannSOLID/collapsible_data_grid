@@ -50,8 +50,9 @@ jobs:
       - name: Run coverage
         run: flutter test --coverage  
 
-      - name: create badge
-        run: flutter pub run covadge coverage/lcov.info ./
-
+      - uses: gaelgirodon/ci-badges-action@v1  
+        with:
+          gist-id: 40258b2e5b92b1424c22d5a036dd1a8e
+          token: ${{ secrets.CI_GIST }}
       
     
