@@ -50,9 +50,9 @@ jobs:
       - name: Run coverage
         run: flutter test --coverage  
 
-      - uses: gaelgirodon/ci-badges-action@v1  
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
         with:
-          gist-id: 40258b2e5b92b1424c22d5a036dd1a8e
           token: ${{ secrets.CI_GIST }}
       
     
