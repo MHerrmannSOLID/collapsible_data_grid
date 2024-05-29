@@ -1,4 +1,4 @@
-![main_build](https://github.com/MHerrmannSOLID/collapsible_data_grid/actions/workflows/dart.yml/badge.svg) [![codecov](https://codecov.io/github/MHerrmannSOLID/collapsible_data_grid/graph/badge.svg?token=C0Q6V8F9FO)](https://codecov.io/github/MHerrmannSOLID/collapsible_data_grid)
+![main_build](https://github.com/MHerrmannSOLID/collapsible_data_grid/actions/workflows/dart.yml/badge.svg) [![codecov](https://codecov.io/github/MHerrmannSOLID/collapsible_data_grid/graph/badge.svg?token=C0Q6V8F9FO)](https://codecov.io/github/MHerrmannSOLID/collapsible_data_grid) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Yet Another Data Grid  
 
