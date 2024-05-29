@@ -122,4 +122,25 @@ void main() {
 
     expect(find.byType(ExpandableTableRow), findsOneWidget);
   });
+
+  testWidgets(
+      'Create a pre foded table having one expandable row '
+      '--> There should be an expandable row rendered.', (tester) async {
+    await tester.pumpWidget(Material(
+      child: CollapsibleDataGrid(
+        columnConfigurations: testColumns,
+        rowConfigurations: [
+          RowConfiguration(cells: [1, 1]),
+          RowConfiguration(cells: [2, 2]),
+          RowConfiguration(cells: [3, 2]),
+          RowConfiguration(cells: [4, 2]),
+          RowConfiguration(cells: [5, 3]),
+        ],
+        controller: CollapsibleGridController(),
+        collapseByColumn: 1,
+      ),
+    ).wrapDirectional());
+
+    expect(find.byType(ExpandableTableRow), findsNWidgets(1));
+  });
 }

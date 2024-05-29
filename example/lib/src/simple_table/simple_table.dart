@@ -38,12 +38,12 @@ class _SimpleTableState extends State<SimpleTable> {
       'Column 3',
     ];
     var rowConfigurations = [
-      RowConfiguration(
-          cells: ['Row 1, Column 1', 'Row 1, Column 2', 'Row 1, Column 3']),
-      RowConfiguration(
-          cells: ['Row 2, Column 1', 'Row 2, Column 2', 'Row 2, Column 3']),
-      RowConfiguration(
-          cells: ['Row 3, Column 1', 'Row 3, Column 2', 'Row 3, Column 3']),
+      RowConfiguration(cells: ['Row 1, Column 1', 'Row 1, Column 2', 2]),
+      RowConfiguration(cells: ['Row 2, Column 1', 'Row 2, Column 2', 4]),
+      RowConfiguration(cells: ['Row 3, Column 1', 'Row 3, Column 2', 5]),
+      RowConfiguration(cells: ['Row 4, Column 1', 'Row 4, Column 2', 5]),
+      RowConfiguration(cells: ['Row 5, Column 1', 'Row 5, Column 2', 5]),
+      RowConfiguration(cells: ['Row 6, Column 1', 'Row 6, Column 2', 8]),
     ];
 
     return Scaffold(
@@ -60,6 +60,7 @@ class _SimpleTableState extends State<SimpleTable> {
                 width: constraints.maxWidth * 0.90,
                 height: constraints.maxHeight * 0.90,
                 child: CollapsibleDataGrid(
+                  collapseByColumn: 2,
                   columnConfigurations: columnConfigurations,
                   rowConfigurations: rowConfigurations,
                   headerBackground: Colors.blueGrey,
