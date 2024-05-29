@@ -1,4 +1,4 @@
-![Batdge test](https://github.com/MHerrmannSOLID/collapsible_data_gridactions/workflows/main.yml/badge.svg)
+![main_build](https://github.com/MHerrmannSOLID/collapsible_data_grid/actions/workflows/dart.yml/badge.svg)
 
 # Yet Another Data Grid  
 
