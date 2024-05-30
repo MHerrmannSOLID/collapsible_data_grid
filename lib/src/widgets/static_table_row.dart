@@ -7,10 +7,14 @@ class StaticTableRow extends StatelessWidget {
   StaticTableRow(
       {required Iterable<ColumnConfiguration> columnConfigurations,
       required this.rowData,
+      this.background,
+      this.cellBorder,
       super.key})
       : columnConfigurations = columnConfigurations.toList();
 
   final RowConfiguration rowData;
+  final Color? background;
+  final CellBorderConfiguration? cellBorder;
   final List<ColumnConfiguration> columnConfigurations;
 
   Widget _clickWrapper(

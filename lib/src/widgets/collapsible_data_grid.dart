@@ -78,5 +78,8 @@ class CollapsibleDataGrid extends StatelessWidget {
           columnConfigurations: controller.columnConfigurations,
           data: data as ExpandableRow)
       : StaticTableRow(
-          columnConfigurations: controller.columnConfigurations, rowData: data);
+          background: bodyBackground,
+          cellBorder: dataCellBorder,
+          columnConfigurations: controller.columnConfigurations,
+          rowData: data);
 }
