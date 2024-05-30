@@ -49,8 +49,10 @@ class CollapsibleDataGrid extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TableHeader(
-                columns: controller.columnConfigurations,
-                headerBackground: headerBackground),
+              columns: controller.columnConfigurations,
+              headerBackground: headerBackground,
+              borderConfiguration: headerCellBorder,
+            ),
             ListenableBuilder(
               listenable: controller,
               builder: (context, child) {
