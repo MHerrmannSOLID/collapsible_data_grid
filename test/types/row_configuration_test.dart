@@ -16,10 +16,10 @@ void main() {
     ]);
 
     await tester.pumpWidget(
-        Row(children: model.cells.map((cell) => cell.buildCell()).toList())
+        Row(children: model.getCells().map((cell) => cell.buildCell()).toList())
             .wrapDirectional());
 
-    expect(model.cells.length, 2);
+    expect(model.getCells().length, 2);
     expect(find.text('Cell 1'), findsOneWidget);
     expect(find.text('Cell 2'), findsOneWidget);
   });
@@ -33,9 +33,9 @@ void main() {
     ]);
 
     await tester.pumpWidget(
-        Row(children: model.cells.map((cell) => cell.buildCell()).toList())
+        Row(children: model.getCells().map((cell) => cell.buildCell()).toList())
             .wrapDirectional());
-    expect(model.cells.length, 2);
+    expect(model.getCells().length, 2);
     expect(find.text('Cell 1'), findsOneWidget);
     expect(find.text('Cell 2'), findsOneWidget);
   });
@@ -50,10 +50,10 @@ void main() {
     ]);
 
     await tester.pumpWidget(
-        Row(children: model.cells.map((cell) => cell.buildCell()).toList())
+        Row(children: model.getCells().map((cell) => cell.buildCell()).toList())
             .wrapDirectional());
 
-    expect(model.cells.length, 2);
+    expect(model.getCells().length, 2);
     expect(find.byIcon(Icons.ac_unit), findsOneWidget);
     expect(find.byIcon(Icons.access_alarm), findsOneWidget);
   });
@@ -68,10 +68,10 @@ void main() {
     ], numberFormat: NumberFormat('#.##', 'de_DE'));
 
     await tester.pumpWidget(
-        Row(children: model.cells.map((cell) => cell.buildCell()).toList())
+        Row(children: model.getCells().map((cell) => cell.buildCell()).toList())
             .wrapDirectional());
 
-    expect(model.cells.length, 2);
+    expect(model.getCells().length, 2);
     expect(find.text('2,35'), findsOneWidget);
     expect(find.text('12'), findsOneWidget);
   });
@@ -86,10 +86,10 @@ void main() {
     ], numberFormat: NumberFormat.currency(locale: 'en_US', symbol: '\$'));
 
     await tester.pumpWidget(
-        Row(children: model.cells.map((cell) => cell.buildCell()).toList())
+        Row(children: model.getCells().map((cell) => cell.buildCell()).toList())
             .wrapDirectional());
 
-    expect(model.cells.length, 2);
+    expect(model.getCells().length, 2);
     expect(find.text('\$2.35'), findsOneWidget);
     expect(find.text('\$12.00'), findsOneWidget);
   });

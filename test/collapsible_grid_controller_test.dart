@@ -64,7 +64,7 @@ void main() {
       var wasHeaderBuilderCalled = false;
       var model = CollapsibleGridController(collapseHeaderBuilder: (rows) {
         wasHeaderBuilderCalled = true;
-        return rows.first.cells;
+        return rows.first.getCells();
       });
       model.initialize(defaultTestColumns, [
         RowConfiguration(cells: [1, 8, 3]),
@@ -82,7 +82,7 @@ void main() {
       var model = CollapsibleGridController(
           collapseHeaderBuilder: (rows) => <GridCellData>[
                 GridCellData<num>(
-                    child: const Text('Test'), colSpan: 1, groupKey: 4711),
+                    child: const Text('Test'), colSpan: 3, groupKey: 4711),
               ]);
       model.initialize(defaultTestColumns, [
         RowConfiguration(cells: [1, 8, 3]),
@@ -91,9 +91,10 @@ void main() {
       ]);
 
       model.collapseColumn(columnIdx: 1);
+
       var header = model.rowConfigurations.first as ExpandableRow;
-      expect(header.cells.length, 1);
-      expect(header.cells.first.groupKey, 4711);
+      expect(header.children.length, 2);
+      expect((header.getCells().first as GridCellData).groupKey, 4711);
     });
   });
 }

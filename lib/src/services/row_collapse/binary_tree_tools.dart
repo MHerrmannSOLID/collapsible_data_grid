@@ -3,7 +3,7 @@ import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 import 'package:collapsible_data_grid/src/types/row_entry_item.dart';
 
 class RowsTreeNode implements Comparable {
-  final GridCellData data;
+  final Comparable data;
   final List<RowEntryItem> rows;
 
   RowsTreeNode(this.data, this.rows);
