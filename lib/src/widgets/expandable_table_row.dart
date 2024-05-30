@@ -4,8 +4,14 @@ import 'package:flutter/material.dart';
 
 class ExpandableTableRow extends StatelessWidget {
   const ExpandableTableRow(
-      {required this.columnConfigurations, required this.data, super.key});
+      {required this.columnConfigurations,
+      required this.data,
+      this.background,
+      this.cellBorder,
+      super.key});
 
+  final Color? background;
+  final CellBorderConfiguration? cellBorder;
   final ExpandableRow data;
   final Iterable<ColumnConfiguration> columnConfigurations;
 

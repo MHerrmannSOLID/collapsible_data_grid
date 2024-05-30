@@ -75,6 +75,8 @@ class CollapsibleDataGrid extends StatelessWidget {
 
   Widget _createTileFrom(RowConfiguration data) => (data.isExpandable)
       ? ExpandableTableRow(
+          background: bodyBackground,
+          cellBorder: dataCellBorder,
           columnConfigurations: controller.columnConfigurations,
           data: data as ExpandableRow)
       : StaticTableRow(
