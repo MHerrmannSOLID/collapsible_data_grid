@@ -20,7 +20,8 @@ class TableGridCell extends StatelessWidget {
     return Expanded(
       flex: weight.toInt(),
       child: DecoratedCell(
-        borderConfiguration: cellData.borderConfiguration,
+        background: cellData.backgroundColor ?? background,
+        borderConfiguration: cellData.borderConfiguration ?? cellBorder,
         child: cellData.buildCell(),
       ),
     );

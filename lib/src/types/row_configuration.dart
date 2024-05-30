@@ -25,7 +25,7 @@ class RowConfiguration {
       : GridCellData<Comparable>(
           child: _mapToWidget(cell),
           groupKey: cell,
-          backgroundColor: Colors.white);
+        );
 
   Widget _mapToWidget(cell) =>
       (cell is Collapsible) ? cell : Text(_formatAsString(cell));
