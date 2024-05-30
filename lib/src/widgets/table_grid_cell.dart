@@ -4,10 +4,16 @@ import 'package:flutter/material.dart';
 
 class TableGridCell extends StatelessWidget {
   const TableGridCell(
-      {required this.cellData, required this.weight, super.key});
+      {required this.cellData,
+      required this.weight,
+      this.background,
+      this.cellBorder,
+      super.key});
 
   final GridCellData cellData;
   final double weight;
+  final Color? background;
+  final CellBorderConfiguration? cellBorder;
 
   @override
   Widget build(BuildContext context) {

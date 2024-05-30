@@ -1,5 +1,6 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 import 'package:collapsible_data_grid/src/widgets/static_table_row.dart';
+import 'package:collapsible_data_grid/src/widgets/table_grid_cell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -150,6 +151,58 @@ void main() {
 
     expect(tester.getElementWidth(const Key('column1')), (screenWidth / 3) * 2);
     expect(tester.getElementWidth(const Key('column2')), (screenWidth / 3));
+  });
+
+  testWidgets(
+      'Creating a table row with red backgorund color '
+      '--> Color gets subitted to the table grid cell ', (tester) async {
+    await tester.pumpWidget(
+      StaticTableRow(
+        background: Colors.red,
+        columnConfigurations: testColumns,
+        rowData: RowConfiguration(cells: [
+          RowConfiguration(cells: [1])
+        ]),
+      ).wrapDirectional(),
+    );
+
+    var tableGridCell =
+        tester.firstWidget<TableGridCell>(find.byType(TableGridCell));
+    expect(tableGridCell.background, Colors.red);
+  });
+
+  testWidgets(
+      'Creating a table row with red with border decoration '
+      '--> Border decoration gets subitted to the table grid cell ',
+      (tester) async {
+    await tester.pumpWidget(
+      StaticTableRow(
+        cellBorder: const CellBorderConfiguration(
+          topBorder: BorderSide(color: Colors.black, width: 1),
+          rightBorder: BorderSide(color: Colors.yellow, width: 2),
+          leftBorder: BorderSide(color: Colors.red, width: 3),
+          bottomBorder: BorderSide(color: Colors.green, width: 4),
+        ),
+        background: Colors.lime,
+        columnConfigurations: testColumns,
+        rowData: RowConfiguration(cells: [
+          RowConfiguration(cells: [1])
+        ]),
+      ).wrapDirectional(),
+    );
+
+    var tableGridCell =
+        tester.firstWidget<TableGridCell>(find.byType(TableGridCell));
+    expect(tableGridCell.background, Colors.lime);
+    var cellBorder = tableGridCell.cellBorder!;
+    expect(cellBorder.topBorder.color, Colors.black);
+    expect(cellBorder.topBorder.width, 1);
+    expect(cellBorder.rightBorder.color, Colors.yellow);
+    expect(cellBorder.rightBorder.width, 2);
+    expect(cellBorder.leftBorder.color, Colors.red);
+    expect(cellBorder.leftBorder.width, 3);
+    expect(cellBorder.bottomBorder.color, Colors.green);
+    expect(cellBorder.bottomBorder.width, 4);
   });
 }
 

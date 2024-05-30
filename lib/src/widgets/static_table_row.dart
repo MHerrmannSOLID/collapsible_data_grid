@@ -47,7 +47,11 @@ class StaticTableRow extends StatelessWidget {
       for (var j = 0; j < rowDataCells[i].colSpan; j++)
         weight += (columnConfigurations[i + j].weight);
 
-      cells.add(TableGridCell(weight: weight, cellData: rowDataCells[i]));
+      cells.add(TableGridCell(
+          weight: weight,
+          background: background,
+          cellBorder: cellBorder,
+          cellData: rowDataCells[i]));
     }
     return cells;
   }
