@@ -14,20 +14,26 @@ class ExpandableRow implements RowConfiguration {
   @override
   final bool isExpandable;
 
-  @override
-  final List<GridCellData> cells;
+  final List<GridCellData> _cells;
 
   @override
   void Function(BuildContext context)? get onTap => null;
 
   ExpandableRow(
-      {required this.cells,
+      {required List<GridCellData> cells,
       required this.children,
       ExpandableController? controller,
       NumberFormat? numberFormat})
       : isExpandable = true,
+        _cells = cells,
         numberFormat = numberFormat ?? RowConfiguration.defaultNumberFormat,
         _controller = controller ?? ExpandableController();
 
   ExpandableController get controller => _controller;
+
+  @override
+  List<GridCellData<Comparable>> getCells() => _cells;
+
+  @override
+  List<Comparable> get cellsData => _cells;
 }

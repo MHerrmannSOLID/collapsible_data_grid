@@ -85,7 +85,7 @@ class RowCollapseService {
   void _initDataStructures(int columnIdx) {
     for (var row in rowConfigurations) {
       var currentRow = RowEntryItem(row);
-      var collapseColumn = row.cells[columnIdx];
+      var collapseColumn = row.cellsData[columnIdx];
 
       allRowsLinkedList.add(currentRow);
 

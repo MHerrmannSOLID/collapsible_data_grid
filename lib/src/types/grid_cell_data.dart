@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class GridCellData<TGroupKey extends Comparable>
     implements Comparable<GridCellData<TGroupKey>> {
   final Widget child;
-  CellBorderConfiguration borderConfiguration;
+  CellBorderConfiguration? borderConfiguration;
   final AlignmentGeometry _alignmentGeometry;
   final int colSpan;
   Color? backgroundColor;
@@ -15,10 +15,9 @@ class GridCellData<TGroupKey extends Comparable>
       required this.groupKey,
       this.colSpan = 1,
       this.backgroundColor,
-      CellBorderConfiguration? borderConfiguration,
+      this.borderConfiguration,
       AlignmentGeometry? alignmentGeometry})
-      : borderConfiguration = borderConfiguration ?? CellBorderConfiguration(),
-        _alignmentGeometry = alignmentGeometry ?? Alignment.center;
+      : _alignmentGeometry = alignmentGeometry ?? Alignment.center;
 
   Widget buildCell() {
     return Container(

@@ -1,3 +1,5 @@
+![main_build](https://github.com/MHerrmannSOLID/collapsible_data_grid/actions/workflows/dart.yml/badge.svg) [![codecov](https://codecov.io/github/MHerrmannSOLID/collapsible_data_grid/graph/badge.svg?token=C0Q6V8F9FO)](https://codecov.io/github/MHerrmannSOLID/collapsible_data_grid) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # Yet Another Data Grid  
 
 Yet another data grid ... but why for god's sake? Basically because we needed a data grid for our project that can be grouped by column content, such as the same date, same amount/value, same operator, same project, etc., and then collapse all affected rows into a single expandable row. 

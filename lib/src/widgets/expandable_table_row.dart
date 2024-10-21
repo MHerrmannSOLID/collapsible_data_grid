@@ -4,22 +4,37 @@ import 'package:flutter/material.dart';
 
 class ExpandableTableRow extends StatelessWidget {
   const ExpandableTableRow(
-      {required this.columnConfigurations, required this.data, super.key});
+      {required this.columnConfigurations,
+      required this.data,
+      this.background,
+      this.cellBorder,
+      super.key});
 
+  final Color? background;
+  final CellBorderConfiguration? cellBorder;
   final ExpandableRow data;
   final Iterable<ColumnConfiguration> columnConfigurations;
 
   @override
   Widget build(BuildContext context) {
     var rows = data.children
-        .map((cell) => StaticTableRow(
-            columnConfigurations: columnConfigurations, rowData: cell))
+        .map(
+          (cell) => StaticTableRow(
+            cellBorder: cellBorder,
+            background: background,
+            columnConfigurations: columnConfigurations,
+            rowData: cell,
+          ),
+        )
         .toList();
 
     return ExpandablePanel(
       controller: data.controller,
       header: StaticTableRow(
-          columnConfigurations: columnConfigurations, rowData: data),
+          cellBorder: cellBorder,
+          background: background,
+          columnConfigurations: columnConfigurations,
+          rowData: data),
       theme: const ExpandableThemeData(
           iconPadding: EdgeInsets.all(0), iconSize: 1, hasIcon: false),
       collapsed: const SizedBox(

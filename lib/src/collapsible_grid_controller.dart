@@ -21,7 +21,7 @@ class CollapsibleGridController extends ChangeNotifier {
 
   static List<GridCellData> _defaultCollapseHeaderBuilder(
       List<RowConfiguration> rows) {
-    return rows.first.cells;
+    return rows.first.getCells();
   }
 
   CollapsibleGridController(
@@ -58,7 +58,7 @@ class CollapsibleGridController extends ChangeNotifier {
     int rowIdx = 0;
     for (var row in _rowConfigurations) {
       int colIdx = 0;
-      for (var cell in row.cells) {
+      for (var cell in row.getCells()) {
         cellStyleBuilder!(colIdx, rowIdx, cell);
         colIdx++;
       }

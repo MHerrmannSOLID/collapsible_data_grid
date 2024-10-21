@@ -7,10 +7,14 @@ class StaticTableRow extends StatelessWidget {
   StaticTableRow(
       {required Iterable<ColumnConfiguration> columnConfigurations,
       required this.rowData,
+      this.background,
+      this.cellBorder,
       super.key})
       : columnConfigurations = columnConfigurations.toList();
 
   final RowConfiguration rowData;
+  final Color? background;
+  final CellBorderConfiguration? cellBorder;
   final List<ColumnConfiguration> columnConfigurations;
 
   Widget _clickWrapper(
@@ -35,14 +39,19 @@ class StaticTableRow extends StatelessWidget {
 
   List<Widget> _createCells() {
     var cells = <Widget>[];
+    var rowDataCells = rowData.getCells();
 
-    for (var i = 0; i < rowData.cells.length; i++) {
+    for (var i = 0; i < rowDataCells.length; i++) {
       double weight = 0;
 
-      for (var j = 0; j < rowData.cells[i].colSpan; j++)
+      for (var j = 0; j < rowDataCells[i].colSpan; j++)
         weight += (columnConfigurations[i + j].weight);
 
-      cells.add(TableGridCell(weight: weight, cellData: rowData.cells[i]));
+      cells.add(TableGridCell(
+          weight: weight,
+          background: background,
+          cellBorder: cellBorder,
+          cellData: rowDataCells[i]));
     }
     return cells;
   }

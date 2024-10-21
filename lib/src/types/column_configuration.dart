@@ -19,12 +19,11 @@ class ColumnConfiguration {
   ColumnConfiguration(
       {required this.header,
       this.weight = 1.0,
-      CellBorderConfiguration? borderConfiguration})
-      : _borderConfiguration = borderConfiguration ?? CellBorderConfiguration();
+      this.borderConfiguration,
+      this.background});
 
-  final CellBorderConfiguration _borderConfiguration;
+  final CellBorderConfiguration? borderConfiguration;
+  final Color? background;
   final Widget header;
   final double weight;
-
-  CellBorderConfiguration get borderConfiguration => _borderConfiguration;
 }

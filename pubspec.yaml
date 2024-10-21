@@ -1,5 +1,5 @@
 name: collapsible_data_grid
-description: "A stylable data grid with the ability to group entries and make the collapsible."
+description: "A stylable data grid that allows grouping of entries and provides collapsibility features."
 version: 0.0.1
 homepage:
 
