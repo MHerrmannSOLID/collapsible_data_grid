@@ -40,20 +40,7 @@ class CollapsibleDataGrid extends StatelessWidget {
             TableHeader(
                 columns: controller.columnConfigurations,
                 headerBackground: _headerBackground),
-            ListenableBuilder(
-              listenable: controller,
-              builder: (context, child) {
-                return Container(
-                  height: constraints.maxHeight - headerHeight,
-                  color: _bodyBackground,
-                  child: ListView(
-                    children: controller.rowConfigurations
-                        .map((rowData) => _createTileFrom(rowData))
-                        .toList(),
-                  ),
-                );
-              },
-            )
+            _buildColumnCells(constraints)
           ],
         );
       },
@@ -66,4 +53,19 @@ class CollapsibleDataGrid extends StatelessWidget {
           data: data as ExpandableRow)
       : StaticTableRow(
           columnConfigurations: controller.columnConfigurations, rowData: data);
+
+  Widget _buildColumnCells(BoxConstraints constraints) => ListenableBuilder(
+        listenable: controller,
+        builder: (context, child) {
+          return Container(
+            height: constraints.maxHeight - headerHeight,
+            color: _bodyBackground,
+            child: ListView(
+              children: controller.rowConfigurations
+                  .map((rowData) => _createTileFrom(rowData))
+                  .toList(),
+            ),
+          );
+        },
+      );
 }
