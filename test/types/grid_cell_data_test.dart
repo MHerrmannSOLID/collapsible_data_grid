@@ -45,4 +45,13 @@ void main() {
 
     expect(find.byKey(const Key('childElement')), findsOneWidget);
   });
+
+  test("Extracting the data encapsulated in a GridCellData instance", () {
+    var gc = GridCellData(child: const Text('Cell 1'), groupKey: 'Cell 1');
+
+    expect(gc.groupKey, 'Cell 1');
+    expect(gc.colSpan, 1);
+    expect(gc.backgroundColor, null);
+    expect(gc.borderConfiguration, null);
+  });
 }

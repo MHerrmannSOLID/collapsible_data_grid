@@ -13,6 +13,9 @@ class DemoAppBar extends StatelessWidget {
         TextButton(
             onPressed: () => Navigator.pushNamed(context, '/'),
             child: Text('Simple table')),
+        TextButton(
+            onPressed: () => Navigator.pushNamed(context, '/header_builder'),
+            child: Text('Header buiilder')),
         SizedBox(width: 20.0)
       ],
     );

@@ -6,9 +6,10 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
-class MaterialStyleTable extends StatefulWidget {
-  const MaterialStyleTable({super.key, required this.title});
+class HeaderBuilderDemo extends StatefulWidget {
+  const HeaderBuilderDemo({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -22,13 +23,14 @@ class MaterialStyleTable extends StatefulWidget {
   final String title;
 
   @override
-  State<MaterialStyleTable> createState() => _MaterialStyleTableState();
+  State<HeaderBuilderDemo> createState() => _HeaderBuilderDemoState();
 }
 
-class _MaterialStyleTableState extends State<MaterialStyleTable>
+class _HeaderBuilderDemoState extends State<HeaderBuilderDemo>
     with SingleTickerProviderStateMixin {
   var model;
-  final tableController = CollapsibleGridController();
+  final tableController =
+      CollapsibleGridController(collapseHeaderBuilder: _headerBilder);
 
   @override
   void initState() {
@@ -84,5 +86,31 @@ class _MaterialStyleTableState extends State<MaterialStyleTable>
         ],
       )),
     );
+  }
+
+  static List<GridCellData<Comparable>> _headerBilder(
+      List<RowConfiguration> rows) {
+    var firstCell = rows.first.getCells().first;
+
+    return <GridCellData>[
+      GridCellData(
+          alignmentGeometry: Alignment.centerLeft,
+          borderConfiguration: firstCell.borderConfiguration,
+          child: SizedBox(
+            height: 50,
+            child: Text(
+              "--> Having  ${rows.length} entries at the ${_getDateFrom(rows.first)} ",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          groupKey: 1)
+    ];
+  }
+
+  static String _getDateFrom(RowConfiguration row) {
+    var dateFromatter = DateFormat('dd.MM.yyyy');
+    var date = (row.getCells()[4] as GridCellData)?.groupKey as DateTime;
+    return dateFromatter.format(date);
   }
 }

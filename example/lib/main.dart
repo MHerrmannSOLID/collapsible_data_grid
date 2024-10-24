@@ -1,3 +1,4 @@
+import 'package:collapsible_data_grid_example/src/header_builder_demo/header_builder_demo.dart';
 import 'package:collapsible_data_grid_example/src/simple_table/simple_table.dart';
 import 'package:collapsible_data_grid_example/src/material_style_table/material_style_table.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
           '/': (context) => const SimpleTable(title: 'Simple table test'),
           '/material_table': (context) =>
               const MaterialStyleTable(title: 'Simple table test'),
+          '/header_builder': (context) =>
+              const HeaderBuilderDemo(title: 'Header builder test'),
         });
   }
 }
