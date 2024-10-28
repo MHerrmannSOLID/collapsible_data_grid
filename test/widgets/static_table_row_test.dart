@@ -68,14 +68,16 @@ void main() {
       (tester) async {
     const screenWidth = 900.0;
     await tester.binding.setSurfaceSize(const Size(screenWidth, 640.0));
-    await tester.pumpWidget(Directionality(
+    await tester.pumpWidget(
+      Directionality(
         textDirection: TextDirection.ltr,
         child: StaticTableRow(
-            columnConfigurations: <ColumnConfiguration>[
-              ColumnConfiguration(header: Container(), weight: 2),
-              ColumnConfiguration(header: Container(), weight: 1),
-            ],
-            rowData: RowConfiguration(cells: [
+          columnConfigurations: <ColumnConfiguration>[
+            ColumnConfiguration(header: Container(), weight: 2),
+            ColumnConfiguration(header: Container(), weight: 1),
+          ],
+          rowData: RowConfiguration(
+            cells: [
               GridCellData(
                 child: Container(
                   width: double.infinity,
@@ -90,7 +92,11 @@ void main() {
                 ),
                 groupKey: 2,
               ),
-            ]))));
+            ],
+          ),
+        ),
+      ),
+    );
 
     expect(tester.getElementWidth(const Key('column1')), (screenWidth / 3) * 2);
     expect(tester.getElementWidth(const Key('column2')), (screenWidth / 3));

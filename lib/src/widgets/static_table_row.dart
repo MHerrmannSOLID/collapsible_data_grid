@@ -44,15 +44,26 @@ class StaticTableRow extends StatelessWidget {
     for (var i = 0; i < rowDataCells.length; i++) {
       double weight = 0;
 
-      for (var j = 0; j < rowDataCells[i].colSpan; j++)
-        weight += (columnConfigurations[i + j].weight);
-
       cells.add(TableGridCell(
-          weight: weight,
+          weight: _calculateCellWeight(rowDataCells, i, weight),
           background: background,
           cellBorder: cellBorder,
           cellData: rowDataCells[i]));
     }
     return cells;
   }
+
+  double _calculateCellWeight(
+      List<GridCellData<Comparable>> rowDataCells, int i, double weight) {
+    if (!_isSpanningMultipleColumns(rowDataCells[i]))
+      return columnConfigurations[i].weight;
+
+    for (var j = 0; j < rowDataCells[i].colSpan; j++)
+      weight += (columnConfigurations[i + j].weight);
+    return weight;
+  }
+
+  bool _isSpanningMultipleColumns(
+          GridCellData<Comparable<dynamic>> currentCell) =>
+      currentCell.colSpan > 1;
 }

@@ -61,7 +61,7 @@ class CollapsibleDataGrid extends StatelessWidget {
                   color: bodyBackground,
                   child: ListView(
                     children: controller.rowConfigurations
-                        .map((rowData) => _createTileFrom(rowData))
+                        .map((rowData) => _createRowFrom(rowData))
                         .toList(),
                   ),
                 );
@@ -73,7 +73,7 @@ class CollapsibleDataGrid extends StatelessWidget {
     );
   }
 
-  Widget _createTileFrom(RowConfiguration data) => (data.isExpandable)
+  Widget _createRowFrom(RowConfiguration data) => (data.isExpandable)
       ? ExpandableTableRow(
           background: bodyBackground,
           cellBorder: dataCellBorder,

@@ -1,6 +1,7 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 import 'package:collapsible_data_grid_example/src/demo_app_bar.dart';
 import 'package:collapsible_data_grid_example/src/data/projects_data_factory.dart';
+import 'package:collapsible_data_grid_example/src/header_builder_demo/header_widget.dart';
 import 'package:collapsible_data_grid_example/src/material_style_table/table_model.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
@@ -91,26 +92,13 @@ class _HeaderBuilderDemoState extends State<HeaderBuilderDemo>
   static List<GridCellData<Comparable>> _headerBilder(
       List<RowConfiguration> rows) {
     var firstCell = rows.first.getCells().first;
-
     return <GridCellData>[
       GridCellData(
+          colSpan: 8,
           alignmentGeometry: Alignment.centerLeft,
           borderConfiguration: firstCell.borderConfiguration,
-          child: SizedBox(
-            height: 50,
-            child: Text(
-              "--> Having  ${rows.length} entries at the ${_getDateFrom(rows.first)} ",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              textAlign: TextAlign.left,
-            ),
-          ),
+          child: HeaderWidget(rows: rows),
           groupKey: 1)
     ];
-  }
-
-  static String _getDateFrom(RowConfiguration row) {
-    var dateFromatter = DateFormat('dd.MM.yyyy');
-    var date = (row.getCells()[4] as GridCellData)?.groupKey as DateTime;
-    return dateFromatter.format(date);
   }
 }
