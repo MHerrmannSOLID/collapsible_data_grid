@@ -1,7 +1,6 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import '../test_helper.dart';
 
 void main() {
@@ -10,7 +9,6 @@ void main() {
       '--> Icon will be wrapped in a Rotation transition ', (tester) async {
     await tester.pumpWidget(ExpansionIcon(
       contoller: FakeExpandableController(),
-      vsync: const TestVSync(),
     ).wrapDirectional());
 
     expect(
@@ -24,7 +22,6 @@ void main() {
       '--> Icon should be applied ', (tester) async {
     await tester.pumpWidget(ExpansionIcon(
       contoller: FakeExpandableController(),
-      vsync: const TestVSync(),
       icon: Icons.add,
     ).wrapDirectional());
 
@@ -41,7 +38,6 @@ void main() {
     await tester.pumpWidget(ExpansionIcon(
       contoller: FakeExpandableController(),
       startAngleRad: 0.123,
-      vsync: const TestVSync(),
     ).wrapDirectional());
 
     var rotTransition =
@@ -61,7 +57,6 @@ void main() {
       contoller: expansionCtrl,
       startAngleRad: 0.0,
       stopAngleRad: 0.456,
-      vsync: const TestVSync(),
     ).wrapDirectional());
 
     expansionCtrl.toggle();
@@ -85,7 +80,6 @@ void main() {
       contoller: expansionCtrl,
       startAngleRad: 0.0,
       stopAngleRad: 0.456,
-      vsync: const TestVSync(),
     ).wrapDirectional());
 
     expansionCtrl.toggle();

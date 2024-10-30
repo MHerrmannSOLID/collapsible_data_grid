@@ -1,16 +1,11 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
-class ExpansionIcon extends StatelessWidget {
+class ExpansionIcon extends StatefulWidget {
   final ExpandableController contoller;
 
   final Animatable<double> _halfTween;
 
-  static final Animatable<double> _easeInTween =
-      CurveTween(curve: Curves.easeIn);
-
-  late final Animation<double> _iconTurns;
-  final TickerProvider vsync;
   final IconData icon;
   final double startAngleRad;
   final double stopAngleRad;
@@ -20,23 +15,38 @@ class ExpansionIcon extends StatelessWidget {
 
   ExpansionIcon(
       {required this.contoller,
-      required this.vsync,
       this.icon = Icons.chevron_right,
       this.startAngleRad = 0.0,
       this.stopAngleRad = 3.1415 / 2.0,
       this.animationDuration = const Duration(milliseconds: 300),
       super.key})
       : _halfTween = Tween<double>(
-            begin: _rad2Tween(startAngleRad), end: _rad2Tween(stopAngleRad)) {
+            begin: _rad2Tween(startAngleRad), end: _rad2Tween(stopAngleRad)) {}
+
+  @override
+  State<StatefulWidget> createState() => ExpansionIconState();
+}
+
+class ExpansionIconState extends State<ExpansionIcon>
+    with TickerProviderStateMixin {
+  late final Animation<double> _iconTurns;
+  static final Animatable<double> _easeInTween =
+      CurveTween(curve: Curves.easeIn);
+
+  @override
+  void initState() {
+    super.initState();
     var animationController =
-        AnimationController(duration: animationDuration, vsync: vsync);
+        AnimationController(duration: widget.animationDuration, vsync: this);
     animationController.value = 0;
-    _iconTurns = animationController.drive(_halfTween.chain(_easeInTween));
-    contoller.addListener(() => onExpansionStateChange(animationController));
+    _iconTurns =
+        animationController.drive(widget._halfTween.chain(_easeInTween));
+    widget.contoller
+        .addListener(() => onExpansionStateChange(animationController));
   }
 
   void onExpansionStateChange(AnimationController animationController) {
-    if (contoller.expanded)
+    if (widget.contoller.expanded)
       animationController.forward();
     else
       animationController.reverse();
@@ -46,7 +56,7 @@ class ExpansionIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return RotationTransition(
       turns: _iconTurns,
-      child: Icon(icon),
+      child: Icon(widget.icon),
     );
   }
 }
