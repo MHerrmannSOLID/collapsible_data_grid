@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class HeaderWidget extends StatefulWidget {
-  const HeaderWidget({required this.rows, super.key});
+  const HeaderWidget({required this.rows, required this.controller, super.key});
 
   final List<RowConfiguration> rows;
+  final ExpandableController controller;
 
   @override
   State<HeaderWidget> createState() => _HeaderWidgetState();
@@ -19,11 +20,11 @@ class _HeaderWidgetState extends State<HeaderWidget>
       height: 50,
       child: Row(children: [
         ExpansionIcon(
-          contoller: ExpandableController(),
+          contoller: widget.controller,
           vsync: this,
         ),
         Text(
-          "--> Having  ${widget.rows.length} entries at the ${_getDateFrom(widget.rows.first)} ",
+          " Having  ${widget.rows.length} entries at the ${_getDateFrom(widget.rows.first)} ",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           textAlign: TextAlign.left,
         ),

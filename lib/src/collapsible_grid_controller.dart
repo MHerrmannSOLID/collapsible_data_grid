@@ -3,7 +3,7 @@ import 'package:collapsible_data_grid/src/services/row_collapse/row_collapse_ser
 import 'package:flutter/material.dart';
 
 typedef CollapseHeaderBuilder = List<GridCellData> Function(
-    List<RowConfiguration> rows);
+    List<RowConfiguration> rows, ExpandableController controller);
 
 typedef CellStyleBuilder = void Function(
     int colIdx, int rowIdx, GridCellData toStyle);
@@ -20,7 +20,7 @@ class CollapsibleGridController extends ChangeNotifier {
   final int groupingColumnIndex;
 
   static List<GridCellData> _defaultCollapseHeaderBuilder(
-      List<RowConfiguration> rows) {
+      List<RowConfiguration> rows, ExpandableController controller) {
     return rows.first.getCells();
   }
 

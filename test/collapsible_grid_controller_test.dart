@@ -62,7 +62,7 @@ void main() {
         'Collapsing the table model at column 1'
         '--> The header build should be called.', () {
       var wasHeaderBuilderCalled = false;
-      var model = CollapsibleGridController(collapseHeaderBuilder: (rows) {
+      var model = CollapsibleGridController(collapseHeaderBuilder: (rows, _) {
         wasHeaderBuilderCalled = true;
         return rows.first.getCells();
       });
@@ -80,7 +80,7 @@ void main() {
         'Collapsing the table model at column 1'
         '--> The header builder result will be applied.', () {
       var model = CollapsibleGridController(
-          collapseHeaderBuilder: (rows) => <GridCellData>[
+          collapseHeaderBuilder: (rows, _) => <GridCellData>[
                 GridCellData<num>(
                     child: const Text('Test'), colSpan: 3, groupKey: 4711),
               ]);

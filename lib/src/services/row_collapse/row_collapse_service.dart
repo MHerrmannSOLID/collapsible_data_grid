@@ -74,8 +74,11 @@ class RowCollapseService {
 
   ExpandableRow _createExpandableRow(RowsTreeNode node) {
     var childRows = node.rows.map((e) => e.rowConfiguration).toList();
+    var controller = ExpandableController();
     return ExpandableRow(
-        cells: _collapseHeaderBuilder(childRows), children: childRows);
+        cells: _collapseHeaderBuilder(childRows, controller),
+        children: childRows,
+        controller: controller);
   }
 
   /// This method creates both the binary tree and the linked list

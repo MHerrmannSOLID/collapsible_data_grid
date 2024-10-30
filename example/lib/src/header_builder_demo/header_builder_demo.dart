@@ -90,14 +90,14 @@ class _HeaderBuilderDemoState extends State<HeaderBuilderDemo>
   }
 
   static List<GridCellData<Comparable>> _headerBilder(
-      List<RowConfiguration> rows) {
+      List<RowConfiguration> rows, ExpandableController controller) {
     var firstCell = rows.first.getCells().first;
     return <GridCellData>[
       GridCellData(
           colSpan: 8,
           alignmentGeometry: Alignment.centerLeft,
           borderConfiguration: firstCell.borderConfiguration,
-          child: HeaderWidget(rows: rows),
+          child: HeaderWidget(rows: rows, controller: controller),
           groupKey: 1)
     ];
   }
