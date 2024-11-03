@@ -1,7 +1,6 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 import 'package:collapsible_data_grid_example/src/demo_app_bar.dart';
 import 'package:collapsible_data_grid_example/src/data/projects_data_factory.dart';
-import 'package:collapsible_data_grid_example/src/header_builder_demo/header_widget.dart';
 import 'package:collapsible_data_grid_example/src/material_style_table/table_model.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
@@ -57,14 +56,11 @@ class _HeaderBuilderDemoState extends State<HeaderBuilderDemo>
       body: SafeArea(
           child: Column(
         children: [
-          Container(
-            height: 70,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton(
-                child: const Text("fold"),
-                onPressed: () => tableController.collapseColumn(columnIdx: 4),
-              ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton(
+              child: const Text("fold"),
+              onPressed: () => tableController.collapseColumn(columnIdx: 4),
             ),
           ),
           Expanded(
@@ -97,8 +93,31 @@ class _HeaderBuilderDemoState extends State<HeaderBuilderDemo>
           colSpan: 8,
           alignmentGeometry: Alignment.centerLeft,
           borderConfiguration: firstCell.borderConfiguration,
-          child: HeaderWidget(rows: rows, controller: controller),
+          child: _createRowWidget(controller, rows),
           groupKey: 1)
     ];
+  }
+
+  static SizedBox _createRowWidget(
+      ExpandableController controller, List<RowConfiguration> rows) {
+    return SizedBox(
+      height: 50,
+      child: Row(children: [
+        ExpansionIcon(
+          contoller: controller,
+        ),
+        Text(
+          " Having  ${rows.length} entries at the ${_getDateFrom(rows.first)} ",
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          textAlign: TextAlign.left,
+        ),
+      ]),
+    );
+  }
+
+  static String _getDateFrom(RowConfiguration row) {
+    var dateFromatter = DateFormat('dd.MM.yyyy');
+    var date = row.getCells()[4].groupKey as DateTime;
+    return dateFromatter.format(date);
   }
 }
