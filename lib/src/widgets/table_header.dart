@@ -15,7 +15,9 @@ class TableHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return IntrinsicHeight(
+        child: Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: columns
           .map(
             (column) => Expanded(
@@ -29,6 +31,6 @@ class TableHeader extends StatelessWidget {
             ),
           )
           .toList(),
-    );
+    ));
   }
 }
