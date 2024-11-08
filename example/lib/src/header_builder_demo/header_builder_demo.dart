@@ -49,6 +49,7 @@ class _HeaderBuilderDemoState extends State<HeaderBuilderDemo>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: DemoAppBar(),

@@ -8,13 +8,12 @@ class StaticTableRow extends StatelessWidget {
       {required Iterable<ColumnConfiguration> columnConfigurations,
       required this.rowData,
       this.background,
-      this.cellBorder,
+      //  this.cellBorder,
       super.key})
       : columnConfigurations = columnConfigurations.toList();
 
   final RowConfiguration rowData;
   final Color? background;
-  final CellBorderConfiguration? cellBorder;
   final List<ColumnConfiguration> columnConfigurations;
 
   Widget _clickWrapper(
@@ -47,7 +46,6 @@ class StaticTableRow extends StatelessWidget {
       cells.add(TableGridCell(
           weight: _calculateCellWeight(rowDataCells, i, weight),
           background: background,
-          cellBorder: cellBorder,
           cellData: rowDataCells[i]));
     }
     return cells;

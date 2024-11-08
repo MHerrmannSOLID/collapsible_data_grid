@@ -24,8 +24,6 @@ class TableHeader extends StatelessWidget {
               flex: column.weight.toInt(),
               child: DecoratedCell(
                 background: column.background ?? headerBackground,
-                borderConfiguration:
-                    column.borderConfiguration ?? borderConfiguration,
                 child: column.header,
               ),
             ),

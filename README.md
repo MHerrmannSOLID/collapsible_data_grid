@@ -22,3 +22,12 @@ For help getting started with Flutter development, view the
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+## Styling the Grid
+Since flutter provides already a [DataTable] in within the default installation, we try to allign as close as possible with the the style of [DataTableThemeData]. In the specific case where there is no dedicated [CollapsibleDataGridThemeData] oar any direct stying availbale, this lbrary will look out for [DataTableThemeData] and copy conguent parameters from there. Given the case that there is also no [DataTableThemeData] it'll create the defaults absed on the general [ThemeData] in the same way as [DataTableThemeData]. This way the [CollapsibleDataGrid] will always allign with the general appearance of the UI.
+The priorities for styling are:
+
+1. Directstyling via the constructor
+2. Styling though the [CollapsibleDataGridThemeData]
+3. Indirect styling though [DataTableThemeData]
+3. Indirect styling though [ThemeData]
+

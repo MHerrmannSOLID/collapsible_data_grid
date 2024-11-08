@@ -7,11 +7,9 @@ class ExpandableTableRow extends StatelessWidget {
       {required this.columnConfigurations,
       required this.data,
       this.background,
-      this.cellBorder,
       super.key});
 
   final Color? background;
-  final CellBorderConfiguration? cellBorder;
   final ExpandableRow data;
   final Iterable<ColumnConfiguration> columnConfigurations;
 
@@ -20,7 +18,6 @@ class ExpandableTableRow extends StatelessWidget {
     var rows = data.children
         .map(
           (cell) => StaticTableRow(
-            cellBorder: cellBorder,
             background: background,
             columnConfigurations: columnConfigurations,
             rowData: cell,
@@ -31,7 +28,6 @@ class ExpandableTableRow extends StatelessWidget {
     return ExpandablePanel(
       controller: data.controller,
       header: StaticTableRow(
-          cellBorder: cellBorder,
           background: background,
           columnConfigurations: columnConfigurations,
           rowData: data),

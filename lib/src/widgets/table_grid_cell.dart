@@ -7,13 +7,13 @@ class TableGridCell extends StatelessWidget {
       {required this.cellData,
       required this.weight,
       this.background,
-      this.cellBorder,
+      //   this.cellBorder,
       super.key});
 
   final GridCellData cellData;
   final double weight;
   final Color? background;
-  final CellBorderConfiguration? cellBorder;
+  //final CellBorderConfiguration? cellBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class TableGridCell extends StatelessWidget {
       flex: weight.toInt(),
       child: DecoratedCell(
         background: cellData.backgroundColor ?? background,
-        borderConfiguration: cellData.borderConfiguration ?? cellBorder,
+        //   borderConfiguration: cellData.borderConfiguration ?? cellBorder,
         child: cellData.buildCell(),
       ),
     );

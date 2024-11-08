@@ -50,6 +50,7 @@ void main() {
         ],
         controller: CollapsibleGridController(),
       ).wrapDirectional());
+      await tester.pumpAndSettle();
 
       var listView = tester.firstWidget<ListView>(find.byType(ListView));
 

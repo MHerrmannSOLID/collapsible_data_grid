@@ -25,7 +25,6 @@ class TableModel {
     columns = data.columnHeaders
         .map((headerText) => ColumnConfiguration(
             header: SizedBox(
-              height: 50,
               child: Text(
                 headerText,
                 style: headerFont,

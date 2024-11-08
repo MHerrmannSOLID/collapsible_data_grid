@@ -1,25 +1,21 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
+import 'package:collapsible_data_grid/src/types/collapsible_data_grid_theme_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DecoratedCell extends StatelessWidget {
-  DecoratedCell(
-      {required this.child,
-      CellBorderConfiguration? borderConfiguration,
-      Color? background,
-      super.key})
-      : _background = background ?? Colors.white,
-        _borderConfiguration =
-            borderConfiguration ?? const CellBorderConfiguration();
+  DecoratedCell({required this.child, Color? background, super.key})
+      : _background = background ?? Colors.transparent;
 
   final Widget child;
-  final CellBorderConfiguration _borderConfiguration;
   final Color _background;
 
   Color get background => _background;
-  CellBorderConfiguration get borderConfiguration => _borderConfiguration;
 
   @override
   Widget build(BuildContext context) {
+    var theme = Provider.of<CollapsibleDataGridThemeData>(context);
+    var borderConfiguration = theme.dataCellDecoration;
     return Container(
         decoration: BoxDecoration(
           color: background,

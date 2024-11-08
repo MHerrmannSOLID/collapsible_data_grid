@@ -166,47 +166,4 @@ void main() {
       expect(element.background, Colors.red);
     });
   });
-
-  testWidgets(
-      'Creaing an expandable row with dedicated border configuration'
-      '--> border configuration will be submitted to all static rows',
-      (tester) async {
-    var controller = ExpandableController();
-    await tester.pumpWidget(Material(
-      child: ExpandableTableRow(
-        background: Colors.orange,
-        cellBorder: const CellBorderConfiguration(
-          topBorder: BorderSide(color: Colors.black, width: 1),
-          rightBorder: BorderSide(color: Colors.yellow, width: 2),
-          leftBorder: BorderSide(color: Colors.red, width: 3),
-          bottomBorder: BorderSide(color: Colors.green, width: 4),
-        ),
-        columnConfigurations: testColumns,
-        data: ExpandableRow(
-          cells: headerRow,
-          children: expandableRows,
-          controller: controller,
-        ),
-      ),
-    ).wrapDirectional());
-
-    controller.toggle();
-
-    await tester.pumpAndSettle();
-
-    tester
-        .widgetList<StaticTableRow>(find.byType(StaticTableRow))
-        .forEach((element) {
-      expect(element.background, Colors.orange);
-      var cellBorder = element.cellBorder!;
-      expect(cellBorder.topBorder.color, Colors.black);
-      expect(cellBorder.topBorder.width, 1);
-      expect(cellBorder.rightBorder.color, Colors.yellow);
-      expect(cellBorder.rightBorder.width, 2);
-      expect(cellBorder.leftBorder.color, Colors.red);
-      expect(cellBorder.leftBorder.width, 3);
-      expect(cellBorder.bottomBorder.color, Colors.green);
-      expect(cellBorder.bottomBorder.width, 4);
-    });
-  });
 }

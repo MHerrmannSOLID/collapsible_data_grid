@@ -176,40 +176,6 @@ void main() {
         tester.firstWidget<TableGridCell>(find.byType(TableGridCell));
     expect(tableGridCell.background, Colors.red);
   });
-
-  testWidgets(
-      'Creating a table row with red with border decoration '
-      '--> Border decoration gets subitted to the table grid cell ',
-      (tester) async {
-    await tester.pumpWidget(
-      StaticTableRow(
-        cellBorder: const CellBorderConfiguration(
-          topBorder: BorderSide(color: Colors.black, width: 1),
-          rightBorder: BorderSide(color: Colors.yellow, width: 2),
-          leftBorder: BorderSide(color: Colors.red, width: 3),
-          bottomBorder: BorderSide(color: Colors.green, width: 4),
-        ),
-        background: Colors.lime,
-        columnConfigurations: testColumns,
-        rowData: RowConfiguration(cells: [
-          RowConfiguration(cells: [1])
-        ]),
-      ).wrapDirectional(),
-    );
-
-    var tableGridCell =
-        tester.firstWidget<TableGridCell>(find.byType(TableGridCell));
-    expect(tableGridCell.background, Colors.lime);
-    var cellBorder = tableGridCell.cellBorder!;
-    expect(cellBorder.topBorder.color, Colors.black);
-    expect(cellBorder.topBorder.width, 1);
-    expect(cellBorder.rightBorder.color, Colors.yellow);
-    expect(cellBorder.rightBorder.width, 2);
-    expect(cellBorder.leftBorder.color, Colors.red);
-    expect(cellBorder.leftBorder.width, 3);
-    expect(cellBorder.bottomBorder.color, Colors.green);
-    expect(cellBorder.bottomBorder.width, 4);
-  });
 }
 
 extension ColumnTestHelper on WidgetTester {

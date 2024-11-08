@@ -7,33 +7,6 @@ import '../test_helper.dart';
 
 void main() {
   testWidgets(
-      'Creating a decorated cell with border configuration'
-      '--> Children content will be rendered', (tester) async {
-    await tester.pumpWidget(DecoratedCell(
-            borderConfiguration: const CellBorderConfiguration(
-              topBorder: BorderSide(color: Colors.black, width: 1),
-              rightBorder: BorderSide(color: Colors.yellow, width: 2),
-              leftBorder: BorderSide(color: Colors.red, width: 3),
-              bottomBorder: BorderSide(color: Colors.green, width: 4),
-            ),
-            child: const Placeholder())
-        .wrapDirectional());
-
-    var cell = tester.firstWidget<Container>(find.descendant(
-        of: find.byType(DecoratedCell), matching: find.byType(Container)));
-    var cellBorder = (cell.decoration as BoxDecoration).border as Border;
-
-    expect(cellBorder.top.color, Colors.black);
-    expect(cellBorder.top.width, 1);
-    expect(cellBorder.right.color, Colors.yellow);
-    expect(cellBorder.right.width, 2);
-    expect(cellBorder.left.color, Colors.red);
-    expect(cellBorder.left.width, 3);
-    expect(cellBorder.bottom.color, Colors.green);
-    expect(cellBorder.bottom.width, 4);
-  });
-
-  testWidgets(
       'Creating a decorated cell'
       '--> Default backgorund should be white', (tester) async {
     await tester.pumpWidget(
