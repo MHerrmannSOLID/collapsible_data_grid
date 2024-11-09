@@ -1,27 +1,104 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
+import 'package:collapsible_data_grid/src/types/collapsible_data_grid_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
   test(
       'Creation of the CollapsibleDataGridThemeData '
-      ' --> Only the bottom border has an active configuration.', () {
-    var testConfig = CellBorderConfiguration();
+      ' --> will be created with a default CellBorderConfiguration,'
+      ' if not defined differently.', () {
+    var testConfig = CollapsibleDataGridThemeData();
 
-    expect(testConfig.topBorder, BorderSide.none);
-    expect(testConfig.leftBorder, BorderSide.none);
-    expect(testConfig.rightBorder, BorderSide.none);
-    expect(testConfig.bottomBorder, isNot(BorderSide.none));
+    expect(testConfig.dataCellDecoration, const CellBorderConfiguration());
+  });
+
+  test(
+      'Creation of the CollapsibleDataGridThemeData with red bottom border'
+      ' --> will prefer the given decoration.', () {
+    var testConfig = CollapsibleDataGridThemeData(
+      dataCellDecoration: const CellBorderConfiguration(
+        bottomBorder: BorderSide(color: Colors.red),
+      ),
+    );
+
+    expect(testConfig.dataCellDecoration.bottomBorder.color, Colors.red);
   });
 
   test(
       'Creation of the CollapsibleDataGridThemeData '
-      ' --> Sets a gey 1px bottom border by default.', () {
-    var testConfig = CellBorderConfiguration();
+      ' --> wil create a transparent background by default.', () {
+    var testConfig = CollapsibleDataGridThemeData();
 
-    expect(testConfig.bottomBorder.color, Colors.grey);
-    expect(testConfig.bottomBorder.width, 1.0);
-    expect(testConfig.bottomBorder.strokeAlign, BorderSide.strokeAlignInside);
-    expect(testConfig.bottomBorder.style, BorderStyle.solid);
+    var tableBackground = testConfig.tableBackground.resolve({});
+    expect(tableBackground, Colors.transparent);
+  });
+
+  test(
+      'Creation of the CollapsibleDataGridThemeData with red background'
+      ' --> will prefer the given background.', () {
+    var testConfig = CollapsibleDataGridThemeData(
+      tableBackground: WidgetStateColor.resolveWith((_) => Colors.red),
+    );
+
+    var tableBackground = testConfig.tableBackground.resolve({});
+    expect(tableBackground, Colors.red);
+  });
+
+  test(
+      'Creating a copy of a CollapsibleDataGridThemeData'
+      ' --> copy exactly resambles the original', () {
+    var testConfig = CollapsibleDataGridThemeData(
+      dataCellDecoration: const CellBorderConfiguration(
+        bottomBorder: BorderSide(color: Colors.red),
+      ),
+      tableBackground: WidgetStateColor.resolveWith((_) => Colors.red),
+    );
+
+    var copy = testConfig.copyWith() as CollapsibleDataGridThemeData;
+
+    expect(copy.dataCellDecoration.bottomBorder.color, Colors.red);
+    var tableBackground = copy.tableBackground.resolve({});
+    expect(tableBackground, Colors.red);
+  });
+
+  test(
+      'Creating a copy of a CollapsibleDataGridThemeData with grenn bottom boder'
+      ' --> copy exactly resambles the original', () {
+    var testConfig = CollapsibleDataGridThemeData(
+      dataCellDecoration: const CellBorderConfiguration(
+        bottomBorder: BorderSide(color: Colors.red),
+      ),
+      tableBackground: WidgetStateColor.resolveWith((_) => Colors.red),
+    );
+
+    var copy = testConfig.copyWith(
+      dataCellDecoration: const CellBorderConfiguration(
+        bottomBorder: BorderSide(color: Colors.green),
+      ),
+    ) as CollapsibleDataGridThemeData;
+
+    expect(copy.dataCellDecoration.bottomBorder.color, Colors.green);
+    var tableBackground = copy.tableBackground.resolve({});
+    expect(tableBackground, Colors.red);
+  });
+
+  test(
+      'Creating a copy of a CollapsibleDataGridThemeData with green cell backgorund'
+      ' --> copy exactly resambles the original', () {
+    var testConfig = CollapsibleDataGridThemeData(
+      dataCellDecoration: const CellBorderConfiguration(
+        bottomBorder: BorderSide(color: Colors.red),
+      ),
+      tableBackground: WidgetStateColor.resolveWith((_) => Colors.red),
+    );
+
+    var copy = testConfig.copyWith(
+      tableBackground: WidgetStateColor.resolveWith((_) => Colors.green),
+    ) as CollapsibleDataGridThemeData;
+
+    expect(copy.dataCellDecoration.bottomBorder.color, Colors.red);
+    var tableBackground = copy.tableBackground.resolve({});
+    expect(tableBackground, Colors.green);
   });
 }

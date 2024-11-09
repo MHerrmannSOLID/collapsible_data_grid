@@ -7,6 +7,8 @@ class CollapsibleDataGridThemeData
       Theme.of(ctx).extension<CollapsibleDataGridThemeData>();
 
   final CellBorderConfiguration dataCellDecoration;
+  final WidgetStateProperty<Color> tableBackground;
+
   //final double? dataRowMinHeight;
   //final double? dataRowMaxHeight;
   // final TextStyle? dataTextStyle;
@@ -20,7 +22,10 @@ class CollapsibleDataGridThemeData
   // final WidgetStateProperty<MouseCursor?>? dataRowCursor;
   // final MainAxisAlignment? headingRowAlignment;
 
-  CollapsibleDataGridThemeData({CellBorderConfiguration? dataCellDecoration}
+  CollapsibleDataGridThemeData({
+    CellBorderConfiguration? dataCellDecoration,
+    WidgetStateProperty<Color>? tableBackground,
+  }
       // this.dataRowMinHeight,
       // this.dataRowMaxHeight,
       // this.dataTextStyle,
@@ -33,13 +38,19 @@ class CollapsibleDataGridThemeData
       // this.headingCellCursor,
       // this.dataRowCursor,
       // this.headingRowAlignment,
-      )
-      : this.dataCellDecoration =
-            dataCellDecoration ?? const CellBorderConfiguration();
+      )  : dataCellDecoration = dataCellDecoration ?? const CellBorderConfiguration(),
+        tableBackground = tableBackground ??
+            WidgetStateColor.resolveWith((_) => Colors.transparent);
 
   @override
-  ThemeExtension<CollapsibleDataGridThemeData> copyWith() {
-    return CollapsibleDataGridThemeData();
+  ThemeExtension<CollapsibleDataGridThemeData> copyWith({
+    CellBorderConfiguration? dataCellDecoration,
+    WidgetStateProperty<Color>? tableBackground,
+  }) {
+    return CollapsibleDataGridThemeData(
+      dataCellDecoration: dataCellDecoration ?? this.dataCellDecoration,
+      tableBackground: tableBackground ?? this.tableBackground,
+    );
   }
 
   @override
