@@ -1,4 +1,6 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
+import 'package:collapsible_data_grid/src/types/collapsible_data_grid_theme_data.dart';
+import 'package:collapsible_data_grid/src/widgets/decorated_cell.dart';
 import 'package:collapsible_data_grid/src/widgets/expandable_table_row.dart';
 import 'package:collapsible_data_grid/src/widgets/static_table_row.dart';
 import 'package:flutter/material.dart';
@@ -164,6 +166,58 @@ void main() {
         .widgetList<StaticTableRow>(find.byType(StaticTableRow))
         .forEach((element) {
       expect(element.background, Colors.red);
+    });
+  });
+
+  testWidgets(
+      'Creaing an expandable row with dedicated border configuration'
+      '--> border configuration will be submitted to all static rows',
+      (tester) async {
+    var controller = ExpandableController();
+    await tester.pumpWidget(
+      Material(
+        child: ExpandableTableRow(
+          background: Colors.orange,
+          columnConfigurations: testColumns,
+          data: ExpandableRow(
+            cells: headerRow,
+            children: expandableRows,
+            controller: controller,
+          ),
+        ),
+      ).wrapDirectional().addThemeProvider(
+            collapsibleDataGridThemeData: CollapsibleDataGridThemeData(
+              dataCellDecoration: const CellBorderConfiguration(
+                topBorder: BorderSide(color: Colors.black, width: 1),
+                rightBorder: BorderSide(color: Colors.yellow, width: 2),
+                leftBorder: BorderSide(color: Colors.red, width: 3),
+                bottomBorder: BorderSide(color: Colors.green, width: 4),
+              ),
+            ),
+          ),
+    );
+
+    controller.toggle();
+
+    await tester.pumpAndSettle();
+
+    tester
+        .widgetList<StaticTableRow>(find.byType(StaticTableRow))
+        .forEach((element) {
+      expect(element.background, Colors.orange);
+
+      var cell = tester.firstWidget<Container>(find.descendant(
+          of: find.byType(DecoratedCell), matching: find.byType(Container)));
+      var cellBorder = (cell.decoration as BoxDecoration).border as Border;
+
+      expect(cellBorder.top.color, Colors.black);
+      expect(cellBorder.top.width, 1);
+      expect(cellBorder.right.color, Colors.yellow);
+      expect(cellBorder.right.width, 2);
+      expect(cellBorder.left.color, Colors.red);
+      expect(cellBorder.left.width, 3);
+      expect(cellBorder.bottom.color, Colors.green);
+      expect(cellBorder.bottom.width, 4);
     });
   });
 }
