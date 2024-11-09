@@ -15,18 +15,24 @@ void main() {
   testWidgets(
       'Rendering a table row with 2 columns'
       '--> Both columns get rendered and can be found', (tester) async {
-    await tester.pumpWidget(Directionality(
+    await tester.pumpWidget(
+      Directionality(
         textDirection: TextDirection.ltr,
         child: StaticTableRow(
-            columnConfigurations: testColumns,
-            rowData: RowConfiguration(cells: [
+          columnConfigurations: testColumns,
+          rowData: RowConfiguration(
+            cells: [
               GridCellData(
                   child: const Text('Cell 1', key: Key('column1')),
                   groupKey: 1),
               GridCellData(
                   child: const Text('Cell 2', key: Key('column2')),
                   groupKey: 2),
-            ]))));
+            ],
+          ),
+        ),
+      ).addThemeProvider(),
+    );
 
     expect(find.byKey(const Key('column1')), findsOneWidget);
     expect(find.byKey(const Key('column2')), findsOneWidget);
@@ -35,11 +41,13 @@ void main() {
   testWidgets(
       'Rendering a table row with 2 columns and equal weights'
       '--> Both should have the same width', (tester) async {
-    await tester.pumpWidget(Directionality(
+    await tester.pumpWidget(
+      Directionality(
         textDirection: TextDirection.ltr,
         child: StaticTableRow(
-            columnConfigurations: testColumns,
-            rowData: RowConfiguration(cells: [
+          columnConfigurations: testColumns,
+          rowData: RowConfiguration(
+            cells: [
               GridCellData(
                 child: Container(
                   width: double.infinity,
@@ -54,7 +62,11 @@ void main() {
                 ),
                 groupKey: 2,
               ),
-            ]))));
+            ],
+          ),
+        ),
+      ).addThemeProvider(),
+    );
 
     var col1Width = tester.getSize(find.byKey(const Key('column1'))).width;
     var col2Width = tester.getSize(find.byKey(const Key('column2'))).width;
@@ -95,7 +107,7 @@ void main() {
             ],
           ),
         ),
-      ),
+      ).addThemeProvider(),
     );
 
     expect(tester.getElementWidth(const Key('column1')), (screenWidth / 3) * 2);
@@ -115,7 +127,7 @@ void main() {
           GridCellData(
               child: const Text('Cell 2', key: Key('column2')), groupKey: 2),
         ]),
-      ).wrapDirectional(),
+      ).wrapDirectional().addThemeProvider(),
     );
 
     await tester.tap(find.byType(StaticTableRow));
@@ -129,15 +141,17 @@ void main() {
       (tester) async {
     const screenWidth = 900.0;
     await tester.binding.setSurfaceSize(const Size(screenWidth, 640.0));
-    await tester.pumpWidget(Directionality(
+    await tester.pumpWidget(
+      Directionality(
         textDirection: TextDirection.ltr,
         child: StaticTableRow(
-            columnConfigurations: <ColumnConfiguration>[
-              ColumnConfiguration(header: Container(), weight: 1),
-              ColumnConfiguration(header: Container(), weight: 1),
-              ColumnConfiguration(header: Container(), weight: 1),
-            ],
-            rowData: RowConfiguration(cells: [
+          columnConfigurations: <ColumnConfiguration>[
+            ColumnConfiguration(header: Container(), weight: 1),
+            ColumnConfiguration(header: Container(), weight: 1),
+            ColumnConfiguration(header: Container(), weight: 1),
+          ],
+          rowData: RowConfiguration(
+            cells: [
               GridCellData(
                 colSpan: 2,
                 child: Container(
@@ -153,7 +167,11 @@ void main() {
                 ),
                 groupKey: 2,
               ),
-            ]))));
+            ],
+          ),
+        ),
+      ).addThemeProvider(),
+    );
 
     expect(tester.getElementWidth(const Key('column1')), (screenWidth / 3) * 2);
     expect(tester.getElementWidth(const Key('column2')), (screenWidth / 3));
@@ -169,7 +187,7 @@ void main() {
         rowData: RowConfiguration(cells: [
           RowConfiguration(cells: [1])
         ]),
-      ).wrapDirectional(),
+      ).wrapDirectional().addThemeProvider(),
     );
 
     var tableGridCell =

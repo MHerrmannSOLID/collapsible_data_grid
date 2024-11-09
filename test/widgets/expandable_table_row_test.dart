@@ -71,7 +71,7 @@ void main() {
           children: expandableRows,
         ),
       ),
-    ).wrapDirectional());
+    ).wrapDirectional().addThemeProvider());
 
     expect(find.byKey(const Key('headerCell1')), findsOneWidget);
     expect(find.byKey(const Key('headerCell2')), findsOneWidget);
@@ -88,7 +88,7 @@ void main() {
           children: [],
         ),
       ),
-    ).wrapDirectional());
+    ).wrapDirectional().addThemeProvider());
 
     expect(find.byType(StaticTableRow), findsOneWidget);
   });
@@ -106,7 +106,7 @@ void main() {
         columnConfigurations: testColumns,
         data: expandableRowModel,
       ),
-    ).wrapDirectional());
+    ).wrapDirectional().addThemeProvider());
 
     var staticRow =
         tester.firstWidget(find.byType(StaticTableRow)) as StaticTableRow;
@@ -127,7 +127,7 @@ void main() {
           controller: controller,
         ),
       ),
-    ).wrapDirectional());
+    ).wrapDirectional().addThemeProvider());
 
     controller.toggle();
 
@@ -154,7 +154,7 @@ void main() {
           controller: controller,
         ),
       ),
-    ).wrapDirectional());
+    ).wrapDirectional().addThemeProvider());
 
     controller.toggle();
 

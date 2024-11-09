@@ -23,7 +23,7 @@ void main() {
             weight: 1,
           )
         ],
-      ).wrapDirectional(),
+      ).wrapDirectional().addThemeProvider(),
     );
 
     var tableGridCell =
@@ -48,7 +48,7 @@ void main() {
             weight: 1,
           )
         ],
-      ).wrapDirectional(),
+      ).wrapDirectional().addThemeProvider(),
     );
 
     var tableGridCell =

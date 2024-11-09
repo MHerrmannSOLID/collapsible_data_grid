@@ -13,16 +13,11 @@ class ColumnConfiguration {
             headerText,
             style: headerStyle,
           ),
-          weight: weight,
-          borderConfiguration: borderConfiguration);
+          weight: weight);
 
   ColumnConfiguration(
-      {required this.header,
-      this.weight = 1.0,
-      this.borderConfiguration,
-      this.background});
+      {required this.header, this.weight = 1.0, this.background});
 
-  final CellBorderConfiguration? borderConfiguration;
   final Color? background;
   final Widget header;
   final double weight;

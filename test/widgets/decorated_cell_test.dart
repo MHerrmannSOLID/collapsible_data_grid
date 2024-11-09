@@ -12,7 +12,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: DecoratedCell(child: Placeholder()),
-      ),
+      ).addThemeProvider(),
     );
 
     var cell = tester.firstWidget<Container>(find.descendant(
@@ -20,7 +20,7 @@ void main() {
     var cellBorder = (cell.decoration as BoxDecoration);
 
     expect(cellBorder.color, isNotNull);
-    expect(cellBorder.color, Colors.white);
+    expect(cellBorder.color, Colors.transparent);
   });
 
   testWidgets(
@@ -32,7 +32,7 @@ void main() {
           child: Placeholder(),
           background: Colors.purple,
         ),
-      ),
+      ).addThemeProvider(),
     );
 
     var cell = tester.firstWidget<Container>(find.descendant(

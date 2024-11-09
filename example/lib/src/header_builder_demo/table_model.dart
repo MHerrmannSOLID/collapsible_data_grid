@@ -23,12 +23,14 @@ class TableModel {
 
   TableModel.formProjectsData(ProjectsData data) {
     columns = data.columnHeaders
-        .map((headerText) => ColumnConfiguration(
+        .map(
+          (headerText) => ColumnConfiguration(
             header: Text(
               headerText,
               style: headerFont,
             ),
-            borderConfiguration: _borderConfiguration))
+          ),
+        )
         .toList();
 
     rows = data.data

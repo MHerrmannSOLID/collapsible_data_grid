@@ -1,8 +1,10 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
+import 'package:collapsible_data_grid/src/types/collapsible_data_grid_theme_data.dart';
 import 'package:collapsible_data_grid/src/widgets/static_table_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
 import '../test_helper.dart';
 
 void main() {
@@ -14,18 +16,27 @@ void main() {
   testWidgets(
       'Rendering a table row with 2 columns'
       '--> Both columns get rendered and can be found', (tester) async {
-    await tester.pumpWidget(Directionality(
-        textDirection: TextDirection.ltr,
-        child: StaticTableRow(
+    await tester.pumpWidget(
+      Provider(
+        create: (_) => CollapsibleDataGridThemeData(),
+        builder: (context, _) => Directionality(
+          textDirection: TextDirection.ltr,
+          child: StaticTableRow(
             columnConfigurations: testColumns,
-            rowData: RowConfiguration(cells: [
-              GridCellData(
-                  child: const Text('Cell 1', key: Key('column1')),
-                  groupKey: 1),
-              GridCellData(
-                  child: const Text('Cell 2', key: Key('column2')),
-                  groupKey: 2),
-            ]))));
+            rowData: RowConfiguration(
+              cells: [
+                GridCellData(
+                    child: const Text('Cell 1', key: Key('column1')),
+                    groupKey: 1),
+                GridCellData(
+                    child: const Text('Cell 2', key: Key('column2')),
+                    groupKey: 2),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
 
     expect(find.byKey(const Key('column1')), findsOneWidget);
     expect(find.byKey(const Key('column2')), findsOneWidget);
@@ -34,26 +45,35 @@ void main() {
   testWidgets(
       'Rendering a table row with 2 columns and equal weights'
       '--> Both should have the same width', (tester) async {
-    await tester.pumpWidget(Directionality(
-        textDirection: TextDirection.ltr,
-        child: StaticTableRow(
+    await tester.pumpWidget(
+      Provider(
+        create: (_) => CollapsibleDataGridThemeData(),
+        builder: (context, _) => Directionality(
+          textDirection: TextDirection.ltr,
+          child: StaticTableRow(
             columnConfigurations: testColumns,
-            rowData: RowConfiguration(cells: [
-              GridCellData(
-                child: Container(
-                  width: double.infinity,
-                  key: const Key('column1'),
+            rowData: RowConfiguration(
+              cells: [
+                GridCellData(
+                  child: Container(
+                    width: double.infinity,
+                    key: const Key('column1'),
+                  ),
+                  groupKey: 1,
                 ),
-                groupKey: 1,
-              ),
-              GridCellData(
-                child: Container(
-                  width: double.infinity,
-                  key: const Key('column2'),
+                GridCellData(
+                  child: Container(
+                    width: double.infinity,
+                    key: const Key('column2'),
+                  ),
+                  groupKey: 2,
                 ),
-                groupKey: 2,
-              ),
-            ]))));
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
 
     var col1Width = tester.getSize(find.byKey(const Key('column1'))).width;
     var col2Width = tester.getSize(find.byKey(const Key('column2'))).width;
@@ -67,29 +87,38 @@ void main() {
       (tester) async {
     const screenWidth = 900.0;
     await tester.binding.setSurfaceSize(const Size(screenWidth, 640.0));
-    await tester.pumpWidget(Directionality(
-        textDirection: TextDirection.ltr,
-        child: StaticTableRow(
+    await tester.pumpWidget(
+      Provider(
+        create: (_) => CollapsibleDataGridThemeData(),
+        builder: (context, _) => Directionality(
+          textDirection: TextDirection.ltr,
+          child: StaticTableRow(
             columnConfigurations: <ColumnConfiguration>[
               ColumnConfiguration(header: Container(), weight: 2),
               ColumnConfiguration(header: Container(), weight: 1),
             ],
-            rowData: RowConfiguration(cells: [
-              GridCellData(
-                child: Container(
-                  width: double.infinity,
-                  key: const Key('column1'),
+            rowData: RowConfiguration(
+              cells: [
+                GridCellData(
+                  child: Container(
+                    width: double.infinity,
+                    key: const Key('column1'),
+                  ),
+                  groupKey: 1,
                 ),
-                groupKey: 1,
-              ),
-              GridCellData(
-                child: Container(
-                  width: double.infinity,
-                  key: const Key('column2'),
+                GridCellData(
+                  child: Container(
+                    width: double.infinity,
+                    key: const Key('column2'),
+                  ),
+                  groupKey: 2,
                 ),
-                groupKey: 2,
-              ),
-            ]))));
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
 
     expect(tester.getElementWidth(const Key('column1')), (screenWidth / 3) * 2);
     expect(tester.getElementWidth(const Key('column2')), (screenWidth / 3));
@@ -100,14 +129,22 @@ void main() {
       '--> Tap handler will be called ', (tester) async {
     bool wasTapped = false;
     await tester.pumpWidget(
-      StaticTableRow(
-        columnConfigurations: testColumns,
-        rowData: RowConfiguration(onTap: (context) => wasTapped = true, cells: [
-          GridCellData(
-              child: const Text('Cell 1', key: Key('column1')), groupKey: 1),
-          GridCellData(
-              child: const Text('Cell 2', key: Key('column2')), groupKey: 2),
-        ]),
+      Provider(
+        create: (_) => CollapsibleDataGridThemeData(),
+        builder: (context, _) => StaticTableRow(
+          columnConfigurations: testColumns,
+          rowData: RowConfiguration(
+            onTap: (context) => wasTapped = true,
+            cells: [
+              GridCellData(
+                  child: const Text('Cell 1', key: Key('column1')),
+                  groupKey: 1),
+              GridCellData(
+                  child: const Text('Cell 2', key: Key('column2')),
+                  groupKey: 2),
+            ],
+          ),
+        ),
       ).wrapDirectional(),
     );
 
@@ -122,31 +159,40 @@ void main() {
       (tester) async {
     const screenWidth = 900.0;
     await tester.binding.setSurfaceSize(const Size(screenWidth, 640.0));
-    await tester.pumpWidget(Directionality(
-        textDirection: TextDirection.ltr,
-        child: StaticTableRow(
+    await tester.pumpWidget(
+      Provider(
+        create: (_) => CollapsibleDataGridThemeData(),
+        builder: (context, _) => Directionality(
+          textDirection: TextDirection.ltr,
+          child: StaticTableRow(
             columnConfigurations: <ColumnConfiguration>[
               ColumnConfiguration(header: Container(), weight: 1),
               ColumnConfiguration(header: Container(), weight: 1),
               ColumnConfiguration(header: Container(), weight: 1),
             ],
-            rowData: RowConfiguration(cells: [
-              GridCellData(
-                colSpan: 2,
-                child: Container(
-                  width: double.infinity,
-                  key: const Key('column1'),
+            rowData: RowConfiguration(
+              cells: [
+                GridCellData(
+                  colSpan: 2,
+                  child: Container(
+                    width: double.infinity,
+                    key: const Key('column1'),
+                  ),
+                  groupKey: 1,
                 ),
-                groupKey: 1,
-              ),
-              GridCellData(
-                child: Container(
-                  width: double.infinity,
-                  key: const Key('column2'),
+                GridCellData(
+                  child: Container(
+                    width: double.infinity,
+                    key: const Key('column2'),
+                  ),
+                  groupKey: 2,
                 ),
-                groupKey: 2,
-              ),
-            ]))));
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
 
     expect(tester.getElementWidth(const Key('column1')), (screenWidth / 3) * 2);
     expect(tester.getElementWidth(const Key('column2')), (screenWidth / 3));
