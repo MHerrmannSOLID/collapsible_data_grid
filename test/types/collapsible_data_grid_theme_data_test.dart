@@ -4,7 +4,48 @@ import 'package:collapsible_data_grid/src/types/table_color_property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_helper.dart';
+
 main() {
+  testWidgets(
+      'Query the current theme with the stat "of" method  '
+      '--> getting a valid theme instance .', (tester) async {
+    CollapsibleDataGridThemeData? tableTheme = null;
+    await tester.pumpWidget(
+      Material(
+        child: StatefulBuilder(
+          builder: (context, setState) {
+            tableTheme = CollapsibleDataGridThemeData.of(context);
+            return Placeholder();
+          },
+        ),
+      ).wrapDirectional(
+        collapsibleDataGridThemeData: CollapsibleDataGridThemeData(),
+      ),
+    );
+    expect(tableTheme, isNotNull);
+  });
+
+  testWidgets(
+      'Query the current theme with the stat "of" method  '
+      '--> returns eactly the same theme as injected .', (tester) async {
+    CollapsibleDataGridThemeData? deliveredTheme = null;
+    var tableTheme = CollapsibleDataGridThemeData();
+    await tester.pumpWidget(
+      Material(
+        child: StatefulBuilder(
+          builder: (context, setState) {
+            deliveredTheme = CollapsibleDataGridThemeData.of(context);
+            return Placeholder();
+          },
+        ),
+      ).wrapDirectional(
+        collapsibleDataGridThemeData: tableTheme,
+      ),
+    );
+    expect(deliveredTheme, same(tableTheme));
+  });
+
   test(
       'Creation of the CollapsibleDataGridThemeData '
       ' --> will be created with a default CellBorderConfiguration,'
