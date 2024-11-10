@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 class TableColorProperty extends WidgetStateProperty<Color> {
@@ -59,8 +58,4 @@ class TableColorProperty extends WidgetStateProperty<Color> {
 
   bool _doesKeyExist(Set<WidgetState> key2) =>
       stateColors.keys.any((key1) => key1.containsAll(key2));
-
-  Color test(Color? c1, Color? c2, double r) {
-    return Color.lerp(c1, c2, r)!;
-  }
 }
