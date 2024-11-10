@@ -110,4 +110,56 @@ void main() {
     expect(cells[0].backgroundColor, isNull);
     expect(cells[1].backgroundColor, isNull);
   });
+
+  testWidgets(
+      'Creating directly from custom widgets'
+      '--> The row confcuration will contain the custom widgets',
+      (tester) async {
+    var model = RowConfiguration(cells: [
+      CustomTestWidget(text: 'Cell 1'),
+      CustomTestWidget(text: 'Cell 2'),
+    ]);
+
+    await tester.pumpWidget(
+        Row(children: model.getCells().map((cell) => cell.buildCell()).toList())
+            .wrapDirectional());
+    expect(model.getCells().length, 2);
+    expect(find.byKey(Key('Cell 1')), findsOneWidget);
+    expect(find.byKey(Key('Cell 2')), findsOneWidget);
+  });
+
+  testWidgets(
+      'Having a row configuration with non compareable widgets'
+      '--> Widgets gets wrapped in Collapsibles and get a dummy group key of 0',
+      (tester) async {
+    var model = RowConfiguration(cells: [
+      CustomTestWidget(text: 'Cell 1'),
+      CustomTestWidget(text: 'Cell 2'),
+    ]);
+
+    await tester.pumpWidget(
+        Row(children: model.getCells().map((cell) => cell.buildCell()).toList())
+            .wrapDirectional());
+
+    var collapsibleWrapperCell1 = tester
+        .element(find.byKey(Key('Cell 1')))
+        .findAncestorWidgetOfExactType<Collapsible<num>>();
+    var collapsibleWrapperCell2 = tester
+        .element(find.byKey(Key('Cell 2')))
+        .findAncestorWidgetOfExactType<Collapsible<num>>();
+
+    expect(collapsibleWrapperCell2!.child, isA<CustomTestWidget>());
+    expect(collapsibleWrapperCell2!.groupKey, 0);
+    expect(collapsibleWrapperCell1!.child, isA<CustomTestWidget>());
+    expect(collapsibleWrapperCell1!.groupKey, 0);
+  });
+}
+
+class CustomTestWidget extends StatelessWidget {
+  final String text;
+
+  CustomTestWidget({required this.text}) : super(key: Key(text));
+
+  @override
+  Widget build(BuildContext context) => Placeholder();
 }

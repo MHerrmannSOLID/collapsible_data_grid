@@ -33,6 +33,16 @@ main() {
 
   test(
       'Creation of an expandable row --> '
+      ' "getCells()" and cellData are identical', () {
+    var testCells = _getDummyRow();
+
+    var testRow = ExpandableRow(cells: testCells, children: []);
+
+    expect(testRow.getCells(), same(testRow.cellsData));
+  });
+
+  test(
+      'Creation of an expandable row --> '
       ' "cellsData" will provide the "cells" delivered in the constuctor', () {
     var testCells = _getDummyRow();
 

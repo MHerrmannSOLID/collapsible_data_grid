@@ -61,17 +61,8 @@ class CollapsibleDataGridThemeData
       covariant ThemeExtension<CollapsibleDataGridThemeData>? other, double t) {
     if (identical(this, other) || other == null) return this;
     var target = other as CollapsibleDataGridThemeData;
-    WidgetStateProperty.lerp(
-      tableBackground,
-      tableBackground,
-      0.6,
-      (p0, p1, p2) {
-        print("res");
-      },
-    );
-    //t.lerp(Colors.red);
     return CollapsibleDataGridThemeData(
-      tableBackground: tableBackground.lerp(other.tableBackground, t),
+      tableBackground: tableBackground.lerp(target.tableBackground, t),
     );
   }
 }
