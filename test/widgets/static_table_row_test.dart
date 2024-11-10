@@ -187,7 +187,7 @@ void main() {
         background: Colors.red,
         columnConfigurations: testColumns,
         rowData: RowConfiguration(cells: [
-          RowConfiguration(cells: [1])
+          RowConfiguration(cells: [1.toString()])
         ]),
       ).wrapDirectional().addThemeProvider(),
     );

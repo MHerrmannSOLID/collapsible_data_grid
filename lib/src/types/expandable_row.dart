@@ -36,4 +36,16 @@ class ExpandableRow implements RowConfiguration {
 
   @override
   List<Comparable> get cellsData => _cells;
+
+  @override
+  int compareTo(other) {
+    if (other is RowConfiguration) {
+      for (var i = 0; i < cellsData.length; i++) {
+        if (cellsData[i] != other.cellsData[i]) {
+          return cellsData[i].compareTo(other.cellsData[i]);
+        }
+      }
+    }
+    return 0;
+  }
 }

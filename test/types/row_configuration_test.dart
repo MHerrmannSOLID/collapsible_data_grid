@@ -110,4 +110,10 @@ void main() {
     expect(cells[0].backgroundColor, isNull);
     expect(cells[1].backgroundColor, isNull);
   });
+
+  test(
+      'Compaing two rowconfigurations '
+      ' --> should be true if they are equal', () {
+    expect(1, 2);
+  });
 }

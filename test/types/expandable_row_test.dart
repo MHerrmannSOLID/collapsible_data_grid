@@ -86,6 +86,17 @@ main() {
 
     expect(testRow.controller, equals(ownController));
   });
+
+  test(
+      'Comparing two expandable rows --> '
+      ' will return 0 if all cells are equal', () {
+    var testCells = _getDummyRow();
+
+    var testRow1 = ExpandableRow(cells: testCells, children: []);
+    var testRow2 = ExpandableRow(cells: testCells, children: []);
+
+    expect(testRow1.compareTo(testRow2), equals(0));
+  });
 }
 
 class TestExpandableController extends ExpandableController {}

@@ -2,7 +2,7 @@ import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class RowConfiguration {
+class RowConfiguration implements Comparable {
   static final defaultNumberFormat = NumberFormat('#.#');
   final List<Comparable> cellsData = [];
   final bool isExpandable;
@@ -41,5 +41,17 @@ class RowConfiguration {
     print(
         '\x1B[31mError: Cell data needs to be compareable https://api.dart.dev/stable/3.4.2/dart-core/Comparable-class.html. Since this is not the case for ${element.runtimeType.toString()} it will displayed as a String !\x1B[0m');
     return element.toString();
+  }
+
+  @override
+  int compareTo(other) {
+    if (other is RowConfiguration) {
+      for (var i = 0; i < cellsData.length; i++) {
+        if (cellsData[i] != other.cellsData[i]) {
+          return cellsData[i].compareTo(other.cellsData[i]);
+        }
+      }
+    }
+    return 0;
   }
 }

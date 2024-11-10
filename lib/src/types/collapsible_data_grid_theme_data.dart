@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
+import 'package:collapsible_data_grid/src/types/table_color_property.dart';
 import 'package:flutter/material.dart';
 
 class CollapsibleDataGridThemeData
@@ -7,7 +10,7 @@ class CollapsibleDataGridThemeData
       Theme.of(ctx).extension<CollapsibleDataGridThemeData>();
 
   final CellBorderConfiguration dataCellDecoration;
-  final WidgetStateProperty<Color> tableBackground;
+  final TableColorProperty tableBackground;
 
   //final double? dataRowMinHeight;
   //final double? dataRowMaxHeight;
@@ -24,7 +27,7 @@ class CollapsibleDataGridThemeData
 
   CollapsibleDataGridThemeData({
     CellBorderConfiguration? dataCellDecoration,
-    WidgetStateProperty<Color>? tableBackground,
+    TableColorProperty? tableBackground,
   }
       // this.dataRowMinHeight,
       // this.dataRowMaxHeight,
@@ -40,12 +43,12 @@ class CollapsibleDataGridThemeData
       // this.headingRowAlignment,
       )  : dataCellDecoration = dataCellDecoration ?? const CellBorderConfiguration(),
         tableBackground = tableBackground ??
-            WidgetStateColor.resolveWith((_) => Colors.transparent);
+            TableColorProperty(mainColor: Colors.transparent);
 
   @override
   ThemeExtension<CollapsibleDataGridThemeData> copyWith({
     CellBorderConfiguration? dataCellDecoration,
-    WidgetStateProperty<Color>? tableBackground,
+    TableColorProperty? tableBackground,
   }) {
     return CollapsibleDataGridThemeData(
       dataCellDecoration: dataCellDecoration ?? this.dataCellDecoration,
@@ -56,6 +59,19 @@ class CollapsibleDataGridThemeData
   @override
   ThemeExtension<CollapsibleDataGridThemeData> lerp(
       covariant ThemeExtension<CollapsibleDataGridThemeData>? other, double t) {
-    return CollapsibleDataGridThemeData();
+    if (identical(this, other) || other == null) return this;
+    var target = other as CollapsibleDataGridThemeData;
+    WidgetStateProperty.lerp(
+      tableBackground,
+      tableBackground,
+      0.6,
+      (p0, p1, p2) {
+        print("res");
+      },
+    );
+    //t.lerp(Colors.red);
+    return CollapsibleDataGridThemeData(
+      tableBackground: tableBackground.lerp(other.tableBackground, t),
+    );
   }
 }
