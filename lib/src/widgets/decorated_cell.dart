@@ -1,5 +1,5 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
-import 'package:collapsible_data_grid/src/types/collapsible_data_grid_theme_data.dart';
+import 'package:collapsible_data_grid/src/types/theme/collapsible_data_grid_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +15,7 @@ class DecoratedCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Provider.of<CollapsibleDataGridThemeData>(context);
-    var borderConfiguration = theme.dataCellDecoration;
+    var borderConfiguration = theme.cellTheme.boderDecoration;
     return Container(
         decoration: BoxDecoration(
           color: background,

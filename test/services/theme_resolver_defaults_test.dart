@@ -1,5 +1,5 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
-import 'package:collapsible_data_grid/src/types/collapsible_data_grid_theme_data.dart';
+import 'package:collapsible_data_grid/src/types/theme/collapsible_data_grid_theme_data.dart';
 import 'package:collapsible_data_grid/src/widgets/decorated_cell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
