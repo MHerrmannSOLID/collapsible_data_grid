@@ -24,8 +24,7 @@ class _SimpleTableState extends State<SimpleTable> {
   final model = CollapsibleGridController(
     cellStyleBuilder: (colIdx, rowIdx, toStyle) => toStyle
       ..borderConfiguration = CellBorderConfiguration(
-          bottomBorder: BorderSide(style: BorderStyle.solid))
-      ..backgroundColor = Colors.red.shade100,
+          bottomBorder: BorderSide(style: BorderStyle.solid)),
   );
 
   _SimpleTableState() {}
@@ -63,8 +62,6 @@ class _SimpleTableState extends State<SimpleTable> {
                   collapseByColumn: 2,
                   columnConfigurations: columnConfigurations,
                   rowConfigurations: rowConfigurations,
-                  headerBackground: Colors.green,
-                  bodyBackground: Colors.purple,
                   controller: model,
                 ),
               ),

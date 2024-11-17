@@ -1,4 +1,5 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
+import 'package:collapsible_data_grid/src/types/table_color_property.dart';
 import 'package:collapsible_data_grid/src/types/theme/collapsible_data_grid_theme_data.dart';
 import 'package:collapsible_data_grid/src/types/theme/decorated_cell_theme_data.dart';
 import 'package:collapsible_data_grid/src/widgets/decorated_cell.dart';
@@ -149,7 +150,6 @@ void main() {
     var controller = ExpandableController();
     await tester.pumpWidget(Material(
       child: ExpandableTableRow(
-        background: Colors.red,
         columnConfigurations: testColumns,
         data: ExpandableRow(
           cells: headerRow,
@@ -157,7 +157,13 @@ void main() {
           controller: controller,
         ),
       ),
-    ).wrapDirectional().addThemeProvider());
+    ).wrapDirectional().addThemeProvider(
+          collapsibleDataGridThemeData: CollapsibleDataGridThemeData(
+            cellTheme: DecoratedCellThemeData(
+              tableBackground: TableColorProperty(mainColor: Colors.red),
+            ),
+          ),
+        ));
 
     controller.toggle();
 
@@ -166,7 +172,11 @@ void main() {
     tester
         .widgetList<StaticTableRow>(find.byType(StaticTableRow))
         .forEach((element) {
-      expect(element.background, Colors.red);
+      var cell = tester.firstWidget<Container>(find.descendant(
+          of: find.byType(DecoratedCell), matching: find.byType(Container)));
+      var cellDecoration = cell.decoration as BoxDecoration;
+
+      expect(cellDecoration.color, Colors.red);
     });
   });
 
@@ -178,7 +188,6 @@ void main() {
     await tester.pumpWidget(
       Material(
         child: ExpandableTableRow(
-          background: Colors.orange,
           columnConfigurations: testColumns,
           data: ExpandableRow(
             cells: headerRow,
@@ -189,6 +198,7 @@ void main() {
       ).wrapDirectional().addThemeProvider(
             collapsibleDataGridThemeData: CollapsibleDataGridThemeData(
               cellTheme: DecoratedCellThemeData(
+                tableBackground: TableColorProperty(mainColor: Colors.orange),
                 dataCellDecoration: const CellBorderConfiguration(
                   topBorder: BorderSide(color: Colors.black, width: 1),
                   rightBorder: BorderSide(color: Colors.yellow, width: 2),
@@ -207,11 +217,12 @@ void main() {
     tester
         .widgetList<StaticTableRow>(find.byType(StaticTableRow))
         .forEach((element) {
-      expect(element.background, Colors.orange);
-
       var cell = tester.firstWidget<Container>(find.descendant(
           of: find.byType(DecoratedCell), matching: find.byType(Container)));
-      var cellBorder = (cell.decoration as BoxDecoration).border as Border;
+      var cellDecoration = cell.decoration as BoxDecoration;
+      var cellBorder = cellDecoration.border as Border;
+
+      expect(cellDecoration.color, Colors.orange);
 
       expect(cellBorder.top.color, Colors.black);
       expect(cellBorder.top.width, 1);

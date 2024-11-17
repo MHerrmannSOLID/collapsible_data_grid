@@ -7,25 +7,20 @@ class GridCellData<TGroupKey extends Comparable>
   CellBorderConfiguration? borderConfiguration;
   final AlignmentGeometry _alignmentGeometry;
   final int colSpan;
-  Color? backgroundColor;
   final TGroupKey groupKey;
 
   GridCellData(
       {required this.child,
       required this.groupKey,
       this.colSpan = 1,
-      this.backgroundColor,
       this.borderConfiguration,
       AlignmentGeometry? alignmentGeometry})
       : _alignmentGeometry = alignmentGeometry ?? Alignment.center;
 
   Widget buildCell() {
-    return Container(
-      color: backgroundColor,
-      child: Align(
-        alignment: _alignmentGeometry,
-        child: child,
-      ),
+    return Align(
+      alignment: _alignmentGeometry,
+      child: child,
     );
   }
 

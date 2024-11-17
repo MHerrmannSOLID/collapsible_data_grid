@@ -1,4 +1,5 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
+import 'package:collapsible_data_grid/src/types/table_color_property.dart';
 import 'package:collapsible_data_grid/src/types/theme/collapsible_data_grid_theme_data.dart';
 import 'package:collapsible_data_grid/src/types/theme/decorated_cell_theme_data.dart';
 import 'package:collapsible_data_grid/src/widgets/decorated_cell.dart';
@@ -185,17 +186,23 @@ void main() {
       '--> Color gets subitted to the table grid cell ', (tester) async {
     await tester.pumpWidget(
       StaticTableRow(
-        background: Colors.red,
         columnConfigurations: testColumns,
         rowData: RowConfiguration(cells: [
           RowConfiguration(cells: [1.toString()])
         ]),
-      ).wrapDirectional().addThemeProvider(),
+      ).wrapDirectional().addThemeProvider(
+            collapsibleDataGridThemeData: CollapsibleDataGridThemeData(
+              cellTheme: DecoratedCellThemeData(
+                tableBackground: TableColorProperty(mainColor: Colors.red),
+              ),
+            ),
+          ),
     );
 
-    var tableGridCell =
-        tester.firstWidget<TableGridCell>(find.byType(TableGridCell));
-    expect(tableGridCell.background, Colors.red);
+    var tableGridCell = tester.firstWidget<Container>(find.descendant(
+        of: find.byType(DecoratedCell), matching: find.byType(Container)));
+    var tableGridCellDecoration = tableGridCell.decoration as BoxDecoration;
+    expect(tableGridCellDecoration.color, Colors.red);
   });
 
   testWidgets(
@@ -204,7 +211,6 @@ void main() {
       (tester) async {
     await tester.pumpWidget(
       StaticTableRow(
-        background: Colors.lime,
         columnConfigurations: testColumns,
         rowData: RowConfiguration(cells: [
           RowConfiguration(cells: [1])
@@ -212,6 +218,7 @@ void main() {
       ).wrapDirectional().addThemeProvider(
             collapsibleDataGridThemeData: CollapsibleDataGridThemeData(
               cellTheme: DecoratedCellThemeData(
+                tableBackground: TableColorProperty(mainColor: Colors.lime),
                 dataCellDecoration: const CellBorderConfiguration(
                   topBorder: BorderSide(color: Colors.black, width: 1),
                   rightBorder: BorderSide(color: Colors.yellow, width: 2),
@@ -225,12 +232,12 @@ void main() {
 
     var tableGridCell =
         tester.firstWidget<TableGridCell>(find.byType(TableGridCell));
-    expect(tableGridCell.background, Colors.lime);
-
     var cell = tester.firstWidget<Container>(find.descendant(
         of: find.byType(DecoratedCell), matching: find.byType(Container)));
-    var cellBorder = (cell.decoration as BoxDecoration).border as Border;
+    var decoration = cell.decoration as BoxDecoration;
+    var cellBorder = decoration.border as Border;
 
+    expect(decoration.color, Colors.lime);
     expect(cellBorder.top.color, Colors.black);
     expect(cellBorder.top.width, 1);
     expect(cellBorder.right.color, Colors.yellow);

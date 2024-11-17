@@ -67,9 +67,10 @@ void main() {
 
       var restr = tester
           .element(find.byKey(cell1_key))
-          .findAncestorWidgetOfExactType<DecoratedCell>();
+          .findAncestorWidgetOfExactType<Container>();
 
-      expect(restr?.background, Colors.transparent);
+      var deco = restr?.decoration as BoxDecoration;
+      expect(deco.color, Colors.transparent);
     });
 
     testWidgets(

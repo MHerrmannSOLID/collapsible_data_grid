@@ -11,22 +11,17 @@ void main() {
   testWidgets(
       'Creating a decorated cell with border configuration'
       '--> Children content will be rendered', (tester) async {
-    await tester.pumpWidget(
-      DecoratedCell(child: const Placeholder())
-          .wrapDirectional()
-          .addThemeProvider(
-            collapsibleDataGridThemeData: CollapsibleDataGridThemeData(
-              cellTheme: DecoratedCellThemeData(
-                dataCellDecoration: const CellBorderConfiguration(
-                  topBorder: BorderSide(color: Colors.black, width: 1),
-                  rightBorder: BorderSide(color: Colors.yellow, width: 2),
-                  leftBorder: BorderSide(color: Colors.red, width: 3),
-                  bottomBorder: BorderSide(color: Colors.green, width: 4),
-                ),
-              ),
-            ),
-          ),
-    );
+    await tester.pumpWidget(DecoratedCell(
+      cellTheme: DecoratedCellThemeData(
+        dataCellDecoration: const CellBorderConfiguration(
+          topBorder: BorderSide(color: Colors.black, width: 1),
+          rightBorder: BorderSide(color: Colors.yellow, width: 2),
+          leftBorder: BorderSide(color: Colors.red, width: 3),
+          bottomBorder: BorderSide(color: Colors.green, width: 4),
+        ),
+      ),
+      child: const Placeholder(),
+    ).wrapDirectional());
 
     var cell = tester.firstWidget<Container>(find.descendant(
         of: find.byType(DecoratedCell), matching: find.byType(Container)));
@@ -57,25 +52,5 @@ void main() {
 
     expect(cellBorder.color, isNotNull);
     expect(cellBorder.color, Colors.transparent);
-  });
-
-  testWidgets(
-      'Creating a decorated cell with purple background'
-      '--> Background of the inner container should be purple', (tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: DecoratedCell(
-          child: Placeholder(),
-          background: Colors.purple,
-        ),
-      ).addThemeProvider(),
-    );
-
-    var cell = tester.firstWidget<Container>(find.descendant(
-        of: find.byType(DecoratedCell), matching: find.byType(Container)));
-    var cellBorder = (cell.decoration as BoxDecoration);
-
-    expect(cellBorder.color, isNotNull);
-    expect(cellBorder.color, Colors.purple);
   });
 }

@@ -1,6 +1,5 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
 import 'package:collapsible_data_grid/src/services/theme_resolver.dart';
-import 'package:collapsible_data_grid/src/types/theme/collapsible_data_grid_theme_data.dart';
 import 'package:collapsible_data_grid/src/widgets/expandable_table_row.dart';
 import 'package:collapsible_data_grid/src/widgets/static_table_row.dart';
 import 'package:collapsible_data_grid/src/widgets/table_header.dart';
@@ -15,9 +14,6 @@ class CollapsibleDataGrid extends StatelessWidget {
   final int collapseByColumn;
 
   //styling
-  final CellBorderConfiguration? headerCellBorder;
-  final Color? bodyBackground;
-  final Color? headerBackground;
   final TextStyle? headerTextStyle;
   final TextStyle? dataCellTextStyle;
   final bool showExpansionIcon;
@@ -29,9 +25,6 @@ class CollapsibleDataGrid extends StatelessWidget {
     required this.columnConfigurations,
     required this.rowConfigurations,
     this.collapseByColumn = -1,
-    this.headerCellBorder,
-    this.bodyBackground,
-    this.headerBackground,
     this.headerTextStyle,
     this.dataCellTextStyle,
     this.showExpansionIcon = true,
@@ -55,8 +48,6 @@ class CollapsibleDataGrid extends StatelessWidget {
               children: [
                 TableHeader(
                   columns: controller.columnConfigurations,
-                  headerBackground: headerBackground,
-                  borderConfiguration: headerCellBorder,
                 ),
                 ListenableBuilder(
                   listenable: controller,
@@ -80,11 +71,8 @@ class CollapsibleDataGrid extends StatelessWidget {
 
   Widget _createRowFrom(RowConfiguration data) => (data.isExpandable)
       ? ExpandableTableRow(
-          background: bodyBackground,
           columnConfigurations: controller.columnConfigurations,
           data: data as ExpandableRow)
       : StaticTableRow(
-          background: bodyBackground,
-          columnConfigurations: controller.columnConfigurations,
-          rowData: data);
+          columnConfigurations: controller.columnConfigurations, rowData: data);
 }

@@ -1,9 +1,11 @@
 import 'package:collapsible_data_grid/collapsible_data_grid.dart';
+import 'package:collapsible_data_grid/src/types/table_color_property.dart';
 import 'package:collapsible_data_grid/src/types/theme/collapsible_data_grid_theme_data.dart';
 import 'package:collapsible_data_grid/src/widgets/decorated_cell.dart';
 import 'package:collapsible_data_grid/src/widgets/table_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
 
 import '../test_helper.dart';
 
@@ -49,7 +51,7 @@ void main() {
   });
 
   testWidgets(
-      'Pumpoint a single column header width a column sepcific border configuration'
+      'Pumping a single column header width a column sepcific border configuration'
       '--> Border should be rendered', (tester) async {
     var dummy = const Text('Column 1');
     await tester.pumpWidget(
@@ -63,7 +65,7 @@ void main() {
         ),
       ).addThemeProvider(
         collapsibleDataGridThemeData: CollapsibleDataGridThemeData(
-          cellTheme: DecoratedCellThemeData(
+          headerTheme: DecoratedCellThemeData(
             dataCellDecoration: const CellBorderConfiguration(
               topBorder: BorderSide(color: Colors.black, width: 1),
               rightBorder: BorderSide(color: Colors.yellow, width: 2),
@@ -91,19 +93,13 @@ void main() {
   });
 
   testWidgets(
-      'Creating a table header with general border settings and dedicated settings in the column configuration'
-      '--> The column configuration overrules the general table header settings',
+      'Creating a table header with theme configuration'
+      '--> The theme configuration should be applied to the header cells',
       (tester) async {
     var dummy = const Text('Column 1');
     await tester.pumpWidget(
       MaterialApp(
         home: TableHeader(
-          borderConfiguration: const CellBorderConfiguration(
-            topBorder: BorderSide(color: Colors.green, width: 1),
-            rightBorder: BorderSide(color: Colors.red, width: 2),
-            leftBorder: BorderSide(color: Colors.yellow, width: 3),
-            bottomBorder: BorderSide(color: Colors.black, width: 4),
-          ),
           columns: [
             ColumnConfiguration(
               header: dummy,
@@ -112,7 +108,7 @@ void main() {
         ),
       ).addThemeProvider(
         collapsibleDataGridThemeData: CollapsibleDataGridThemeData(
-          cellTheme: DecoratedCellThemeData(
+          headerTheme: DecoratedCellThemeData(
             dataCellDecoration: const CellBorderConfiguration(
               topBorder: BorderSide(color: Colors.black, width: 1),
               rightBorder: BorderSide(color: Colors.yellow, width: 2),
@@ -140,49 +136,31 @@ void main() {
   });
 
   testWidgets(
-      'Pumping a table header with red background color'
-      '--> the decorated cell should be assigned with the given background color',
+      'Pumping a table header with a background themed to blue'
+      '--> the header cells will be displayed with the blue background',
       (tester) async {
     var dummy = const Text('Column 1');
     await tester.pumpWidget(
-      MaterialApp(
-        home: TableHeader(
-          headerBackground: Colors.red,
-          columns: [
-            ColumnConfiguration(
-              header: dummy,
-            ),
-          ],
+      Provider(
+        create: (context) => CollapsibleDataGridThemeData(
+          headerTheme: DecoratedCellThemeData(
+              tableBackground: TableColorProperty(mainColor: Colors.blue)),
+        ),
+        builder: (context, child) => MaterialApp(
+          home: TableHeader(
+            columns: [
+              ColumnConfiguration(
+                header: dummy,
+              ),
+            ],
+          ),
         ),
       ).addThemeProvider(),
     );
 
-    var headerCell =
-        tester.firstWidget<DecoratedCell>(find.byType(DecoratedCell));
-    expect(headerCell.background, Colors.red);
-  });
-
-  testWidgets(
-      'Pumping a table header with red background color and a column configuration with a blue background color'
-      '--> the column configuration should overrule the grid global configuration',
-      (tester) async {
-    var dummy = const Text('Column 1');
-    await tester.pumpWidget(
-      MaterialApp(
-        home: TableHeader(
-          headerBackground: Colors.red,
-          columns: [
-            ColumnConfiguration(
-              header: dummy,
-              background: Colors.blue,
-            ),
-          ],
-        ),
-      ).addThemeProvider(),
-    );
-
-    var headerCell =
-        tester.firstWidget<DecoratedCell>(find.byType(DecoratedCell));
-    expect(headerCell.background, Colors.blue);
+    var headerCell = tester.widget<Container>(find.descendant(
+        of: find.byType(DecoratedCell), matching: find.byType(Container)));
+    var deco = headerCell.decoration as BoxDecoration;
+    expect(deco.color, Colors.blue);
   });
 }

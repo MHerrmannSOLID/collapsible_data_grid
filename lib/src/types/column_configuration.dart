@@ -15,10 +15,8 @@ class ColumnConfiguration {
           ),
           weight: weight);
 
-  ColumnConfiguration(
-      {required this.header, this.weight = 1.0, this.background});
+  ColumnConfiguration({required this.header, this.weight = 1.0});
 
-  final Color? background;
   final Widget header;
   final double weight;
 }

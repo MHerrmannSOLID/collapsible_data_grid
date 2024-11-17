@@ -59,7 +59,7 @@ void main() {
     await tester.pumpWidget(
       Provider(
         create: (_) => CollapsibleDataGridThemeData(
-          cellTheme: DecoratedCellThemeData(
+          headerTheme: DecoratedCellThemeData(
             dataCellDecoration: const CellBorderConfiguration(
               topBorder: BorderSide(color: Colors.black, width: 1),
               rightBorder: BorderSide(color: Colors.yellow, width: 2),

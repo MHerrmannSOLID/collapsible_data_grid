@@ -18,24 +18,6 @@ void main() {
   });
 
   testWidgets(
-      'Given a GridCellData with a background color of 100, 120, 160, 200, '
-      '--> Expect to find a container with same color ', (tester) async {
-    await tester.pumpWidget(GridCellData<num>(
-            backgroundColor: Color.fromARGB(100, 120, 160, 200),
-            groupKey: 4711,
-            child: const SizedBox(width: 10, height: 10))
-        .buildCell()
-        .wrapDirectional());
-
-    var background =
-        (tester.firstWidget(find.byType(Container)) as Container).color;
-    expect(background!.alpha, 100);
-    expect(background.red, 120);
-    expect(background.green, 160);
-    expect(background.blue, 200);
-  });
-
-  testWidgets(
       'Creating a GridCell with a containing a child element '
       '--> the child element should be rendered. ', (tester) async {
     await tester.pumpWidget(GridCellData<num>(
@@ -51,7 +33,6 @@ void main() {
 
     expect(gc.groupKey, 'Cell 1');
     expect(gc.colSpan, 1);
-    expect(gc.backgroundColor, null);
     expect(gc.borderConfiguration, null);
   });
 }

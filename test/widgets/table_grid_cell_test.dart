@@ -9,55 +9,6 @@ import '../test_helper.dart';
 
 void main() {
   testWidgets(
-      'Pumping a Table grid cell data with color red '
-      '--> Decorated cell  will be created with red background ',
-      (tester) async {
-    await tester.pumpWidget(
-      Row(
-        children: [
-          TableGridCell(
-            background: Colors.red,
-            cellData: GridCellData(
-              child: const Text('Cell 1'),
-              groupKey: '',
-            ),
-            weight: 1,
-          )
-        ],
-      ).wrapDirectional().addThemeProvider(),
-    );
-
-    var tableGridCell =
-        tester.firstWidget<DecoratedCell>(find.byType(DecoratedCell));
-    expect(tableGridCell.background, Colors.red);
-  });
-
-  testWidgets(
-      'Pumping a Table grid cell data with color red but having no weight also a color defined in GridCellData'
-      '--> grdi cell data overrules the general background color ',
-      (tester) async {
-    await tester.pumpWidget(
-      Row(
-        children: [
-          TableGridCell(
-            background: Colors.red,
-            cellData: GridCellData(
-              backgroundColor: Colors.green,
-              child: const Text('Cell 1'),
-              groupKey: '',
-            ),
-            weight: 1,
-          )
-        ],
-      ).wrapDirectional().addThemeProvider(),
-    );
-
-    var tableGridCell =
-        tester.firstWidget<DecoratedCell>(find.byType(DecoratedCell));
-    expect(tableGridCell.background, Colors.green);
-  });
-
-  testWidgets(
       'Pumping a Table grid cell data with border decoration data '
       '--> Decorated cell  will be created with the border decoration data',
       (tester) async {
@@ -65,7 +16,6 @@ void main() {
       Row(
         children: [
           TableGridCell(
-            background: Colors.yellowAccent,
             cellData: GridCellData(
               child: const Text('Cell 1'),
               groupKey: '',
@@ -94,7 +44,6 @@ void main() {
         of: find.byType(DecoratedCell), matching: find.byType(Container)));
     var cellBorder = (cell.decoration as BoxDecoration).border as Border;
 
-    expect(decoratedCell.background, Colors.yellowAccent);
     expect(cellBorder.top.color, Colors.black);
     expect(cellBorder.top.width, 1);
     expect(cellBorder.right.color, Colors.yellow);

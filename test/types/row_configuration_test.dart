@@ -94,23 +94,6 @@ void main() {
     expect(find.text('\$12.00'), findsOneWidget);
   });
 
-  test(
-      'Generating the row cells without having backgorund information'
-      '--> background should be null', () {
-    var model = RowConfiguration(
-      cells: [
-        2.346,
-        12,
-      ],
-    );
-
-    var cells = model.getCells();
-
-    expect(cells.length, 2);
-    expect(cells[0].backgroundColor, isNull);
-    expect(cells[1].backgroundColor, isNull);
-  });
-
   testWidgets(
       'Creating directly from custom widgets'
       '--> The row confcuration will contain the custom widgets',
