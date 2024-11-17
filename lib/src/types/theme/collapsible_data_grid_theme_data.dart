@@ -56,6 +56,10 @@ class CollapsibleDataGridThemeData
       covariant ThemeExtension<CollapsibleDataGridThemeData>? other, double t) {
     if (identical(this, other) || other == null) return this;
     var target = other as CollapsibleDataGridThemeData;
-    return CollapsibleDataGridThemeData();
+    return CollapsibleDataGridThemeData(
+      headerTheme:
+          headerTheme.lerp(target.headerTheme, t) as DecoratedCellThemeData,
+      cellTheme: cellTheme.lerp(target.cellTheme, t) as DecoratedCellThemeData,
+    );
   }
 }
